@@ -58,6 +58,13 @@ import statistics
 from collections import Counter, defaultdict
 from itertools import combinations
 
+
+def _to_py(x):
+    """Normalize a value that may have arrived from JS via Pyodide's .send(). Scalars
+    (str/int/bool/None) already cross as native Python types; arrays arrive as a JsProxy
+    and need an explicit conversion to a real Python list."""
+    return x.to_py() if hasattr(x, "to_py") else x
+
 random.seed()
 
 # ---------------------------------------------------------------------------
@@ -101,7 +108,7 @@ CARDS = [
     (4, "Handfoot", 3, 2, "VU", ('round_bonus', {2: {'flip': True}})),  # flip handled via flip_at
     (5, "Burger King", 3, 1, "VU", ('none', {})),
     (6, "Defrilibatorator", -1, 1, "BOLT", ('play_from_discard', {})),
-    (7, "Captain Crunch", -2, 2, "BOLT", ('redirect_threat', {})),
+    (7, "Captain Crunch", -1, 2, "BOLT", ('redirect_threat', {})),
     (8, "Floss", 0, 2, "BOLT", ('destroy_self_for_any', {})),
     (9, "Snow Angel", 2, 1, "BOLT", ('combo', {'group': 'snow_christingle'})),
     (10, "Brain Freeze", 2, 1, "BOLT", ('bean_per_other', {})),
@@ -121,7 +128,7 @@ CARDS = [
     (24, "They", 0, 1, "HAWK", ('combo', {'group': 'moonhawk_they'})),
     (25, "The Corn Maiden", 5, 0, "HAWK", ('none', {})),
     (26, "Voodude", -2, 2, "V", ('voodude_destroy_move', {})),
-    (27, "Mute-Ant", -3, 2, "V", ('destroy_any', {})),
+    (27, "Mute-Ant", -3, 1, "V", ('destroy_any', {})),
     (28, "Footrun Joyfun", 0, 1, "V", ('combo', {'group': 'trio'})),
     (29, "Jetplace Joyface", 0, 1, "V", ('combo', {'group': 'trio'})),
     (30, "Junkrat Crotchrocket", 0, 1, "V", ('combo', {'group': 'trio'})),
@@ -144,7 +151,7 @@ CARDS = [
     (47, "Captain Christingle", 1, 2, "TOPHAT", ('combo', {'group': 'snow_christingle'})),
     (48, "Proctor Odd", 0, 1, "NODES", ('draw_place_under', {})),
     (49, "Belt Tungus", -2, 1, "NODES", ('steal_random_hand', {})),
-    (50, "Accordion Joe", -1, 0, "NODES", ('remove_ability', {})),
+    (50, "Accordion Joe", -1, 1, "NODES", ('remove_ability', {})),
     (51, "Pakrat", 2, 2, "NODES", ('draw_and_play', {})),
     (52, "Glubsmack McDougie", 1, 2, "NODES", ('round_bonus', {3: {'bean': 1, 'power': 1}})),
     (53, "Craig 8", 2, 2, "NODES", ('none', {})),  # flip handled via flip_at
@@ -237,6 +244,7 @@ class Player:
         self.columns = [[], [], []]
         self.bean_balance = 0
         self.shield_active = False
+        self.extra_slot_used = False
 
     def board_all_entries(self):
         return [e for col in self.columns for e in col if not e.destroyed]
@@ -246,8 +254,9 @@ class Player:
 
 
 class Game:
-    def __init__(self, n_players=4):
+    def __init__(self, n_players=4, human_idx=None):
         self.n = n_players
+        self.human_idx = human_idx
         self.players = [Player(i) for i in range(n_players)]
         self.deck = ALL_IDS + ALL_IDS  # 108 cards: two copies of each of the 54 designs
         random.shuffle(self.deck)
@@ -325,6 +334,80 @@ class Game:
             for cid in worst:
                 p.hand.remove(cid)
                 self.discard.append(cid)
+
+        while len(self.trader) < 4:
+            c = self._draw_raw()
+            if c is None:
+                break
+            self.trader.append(c)
+
+    def _apply_draw_choice(self, p, choice):
+        """choice is 'deck', 'discard', or an int Trader card id (see prepare_interactive)."""
+        if choice == 'deck':
+            self.draw_to_hand(p, 1)
+        elif choice == 'discard':
+            if self.discard:
+                p.hand.append(self.discard.pop())
+            else:
+                self.draw_to_hand(p, 1)
+        else:
+            cid = int(choice)
+            if cid in self.trader:
+                self.trader.remove(cid)
+                p.hand.append(cid)
+            else:
+                self.draw_to_hand(p, 1)
+
+    def prepare_interactive(self, p):
+        """Generator version of prepare() for the human player. Yields DecisionRequest
+        dicts and receives the human's answer via .send(). Mirrors prepare() exactly, just
+        with each automatic choice replaced by a yield/response pair."""
+        for i in range(2):
+            choice = yield {
+                'type': 'prepare_draw',
+                'player': p.idx,
+                'draw_number': i + 1,
+                'hand': list(p.hand),
+                'trader': list(self.trader),
+                'discard_top': self.discard[-1] if self.discard else None,
+                'deck_remaining': len(self.deck),
+            }
+            self._apply_draw_choice(p, choice)
+
+        while True:
+            counts = Counter(p.hand)
+            dup_id = next((cid for cid, n in counts.items() if n > 1), None)
+            if dup_id is None:
+                break
+            choice = yield {
+                'type': 'prepare_dedupe',
+                'player': p.idx,
+                'duplicate_id': dup_id,
+                'duplicate_name': name_of(dup_id),
+                'hand': list(p.hand),
+            }
+            if choice == 'redraw':
+                p.hand.remove(dup_id)
+                self.discard.append(dup_id)
+                self.draw_to_hand(p, 1)
+            else:
+                break
+
+        discard_n = 3 if p.wound_pending else 2
+        p.wound_pending = False
+        if len(p.hand) > discard_n:
+            chosen = _to_py(
+                (yield {
+                    'type': 'prepare_discard',
+                    'player': p.idx,
+                    'hand': list(p.hand),
+                    'count': discard_n,
+                })
+            )
+            for cid in chosen:
+                if cid in p.hand:
+                    p.hand.remove(cid)
+                    self.discard.append(cid)
 
         while len(self.trader) < 4:
             c = self._draw_raw()
@@ -462,6 +545,297 @@ class Game:
 
         for i in joiners:
             self.stats['power_totals'][i] += totals[i]
+
+    def _max_round_slots(self, p):
+        if p.extra_slot_used:
+            return 3
+        return 4 if any(ability_of(c)[0] == 'extra_slot' for c in p.hand) else 3
+
+    def run_combat_interactive(self, challenger):
+        """Generator version of run_combat() for a game with a human player. Identical
+        rules/resolution to run_combat() -- AI participants use the exact same heuristics
+        (_plan_rounds, wants_to_join, _resolve_ability) with no yields at all. Only the
+        human player's decisions (join/decline, which cards to play each round, and the
+        explicitly-"choice" ability targets) pause via yield."""
+        self.combats += 1
+        joiners = [challenger]
+        challenger_est = self.hand_power_estimate(self.players[challenger])
+        for i, p in enumerate(self.players):
+            if i == challenger:
+                continue
+            if i == self.human_idx:
+                decision = yield {
+                    'type': 'join_or_decline',
+                    'player': i,
+                    'challenger': challenger,
+                    'hand': list(p.hand),
+                }
+                if decision == 'join':
+                    joiners.append(i)
+            elif self.wants_to_join(p, challenger_est):
+                joiners.append(i)
+
+        if len(joiners) == 1:
+            self.unopposed += 1
+            self.players[challenger].trophies += 2
+            yield {'type': 'combat_unopposed', 'challenger': challenger}
+            return
+
+        self._played_this_combat = defaultdict(list)
+        for i in joiners:
+            self.players[i].columns = [[], [], []]
+            self.players[i].bean_balance = 0
+            self.players[i].shield_active = False
+            self.players[i].extra_slot_used = False
+
+        plans = {}
+        for i in joiners:
+            if i != self.human_idx:
+                plans[i] = self._plan_rounds(self.players[i])
+
+        for rnd in range(3):
+            for i in joiners:
+                p = self.players[i]
+                if i == self.human_idx:
+                    chosen = _to_py((yield {
+                        'type': 'round_play',
+                        'player': i,
+                        'round': rnd + 1,
+                        'hand': list(p.hand),
+                        'bean_balance': p.bean_balance,
+                        'max_slots': self._max_round_slots(p),
+                    }))
+                    for cid in chosen[:4]:
+                        if cid in p.hand:
+                            p.hand.remove(cid)
+                            e = Entry(cid, i)
+                            if cid in FLIP and FLIP[cid][2] == rnd + 1:
+                                e.flipped = True
+                            p.columns[rnd].append(e)
+                            self._played_this_combat[i].append(e)
+                            if ability_of(cid)[0] == 'extra_slot':
+                                p.extra_slot_used = True
+                else:
+                    for cid in plans[i][rnd]:
+                        if cid in p.hand:
+                            p.hand.remove(cid)
+                            e = Entry(cid, i)
+                            if cid in FLIP and FLIP[cid][2] == rnd + 1:
+                                e.flipped = True
+                            p.columns[rnd].append(e)
+                            self._played_this_combat[i].append(e)
+
+            all_entries_this_round = []
+            for i in joiners:
+                all_entries_this_round.extend((i, e) for e in self.players[i].columns[rnd])
+            all_entries_this_round.sort(key=lambda x: x[1].cid)
+
+            for owner_i, e in all_entries_this_round:
+                if e.destroyed:
+                    continue
+                yield from self._resolve_ability_interactive(e, owner_i, rnd, joiners, all_entries_this_round)
+
+        for i in joiners:
+            p = self.players[i]
+            teams_count = Counter(team_of(e.cid) for e in p.board_all_entries())
+            for e in p.board_all_entries():
+                t = team_of(e.cid)
+                if t != "NONE" and teams_count[t] >= 2:
+                    e.bonus_power += 1
+
+        totals = {i: self.players[i].total_power() for i in joiners}
+        best = max(totals.values())
+        worst = min(totals.values())
+        winners = [i for i in joiners if totals[i] == best]
+        losers = [i for i in joiners if totals[i] == worst]
+
+        for i in joiners:
+            for e in self._played_this_combat[i]:
+                self.card_played[e.cid] += 1
+                self.team_played[team_of(e.cid)] += 1
+        for i in winners:
+            for e in self._played_this_combat[i]:
+                self.card_combat_won[e.cid] += 1
+                self.team_combat_won[team_of(e.cid)] += 1
+
+        for i in winners:
+            self.players[i].trophies += 1
+        if best != worst:
+            for i in losers:
+                self.players[i].wound_pending = True
+                self.wounds_given += 1
+
+        for i in joiners:
+            p = self.players[i]
+            for cid in [e.cid for e in p.board_all_entries()]:
+                self.discard.append(cid)
+            target = 6 if p.wound_pending else 7
+            need = max(0, target - len(p.hand))
+            self.draw_to_hand(p, need)
+            p.columns = [[], [], []]
+
+        while len(self.trader) < 4:
+            c = self._draw_raw()
+            if c is None:
+                break
+            self.trader.append(c)
+
+        for i in joiners:
+            self.stats['power_totals'][i] += totals[i]
+
+        yield {
+            'type': 'combat_result',
+            'joiners': joiners,
+            'totals': totals,
+            'winners': winners,
+            'losers': losers,
+        }
+
+    # -- interactive ability targeting (human-owned cards only; AI cards are
+    #    resolved exactly as before via the shared _resolve_ability) --
+    def _target_request(self, subtype, e, pool):
+        return {
+            'type': 'ability_target',
+            'subtype': subtype,
+            'player': e.owner,
+            'card': e.cid,
+            'card_name': name_of(e.cid),
+            'options': [
+                {'uid': id(x), 'cid': x.cid, 'name': name_of(x.cid), 'owner': x.owner, 'power': x.power()}
+                for x in pool
+            ],
+        }
+
+    def _find_by_uid(self, uid, pool):
+        uid = int(_to_py(uid))
+        for x in pool:
+            if id(x) == uid:
+                return x
+        return None
+
+    def _destroy_by_uid(self, uid, pool):
+        target = self._find_by_uid(uid, pool)
+        if target:
+            target.destroyed = True
+
+    def _disable_by_uid(self, uid, pool):
+        target = self._find_by_uid(uid, pool)
+        if target:
+            target.ability_disabled = True
+
+    def _eligible_destroy_targets(self, owner_i, joiners):
+        pool = []
+        for i in joiners:
+            if i == owner_i or self.players[i].shield_active:
+                continue
+            pool.extend([x for x in self.players[i].board_all_entries()
+                         if not x.destroyed and ability_of(x.cid)[0] != 'immune'])
+        return pool
+
+    def _resolve_ability_interactive(self, e, owner_i, rnd, joiners, all_entries_this_round):
+        if owner_i != self.human_idx:
+            self._resolve_ability(e, owner_i, rnd, joiners, all_entries_this_round)
+            return
+        if e.ability_disabled or e.destroyed:
+            return
+        tag, params = ability_of(e.cid)
+        p = self.players[owner_i]
+        others = [i for i in joiners if i != owner_i]
+
+        if tag == 'destroy_own':
+            mine = [x for x in p.board_all_entries() if x is not e and not x.destroyed]
+            if mine:
+                uid = yield self._target_request(tag, e, mine)
+                self._destroy_by_uid(uid, mine)
+        elif tag in ('destroy_any', 'destroy_any_round'):
+            if not (tag == 'destroy_any_round' and params.get('round') != rnd + 1):
+                pool = self._eligible_destroy_targets(owner_i, joiners)
+                if pool:
+                    uid = yield self._target_request(tag, e, pool)
+                    self._destroy_by_uid(uid, pool)
+        elif tag == 'destroy_self_for_any':
+            pool = []
+            for i in joiners:
+                if i == owner_i or self.players[i].shield_active:
+                    continue
+                pool.extend([x for x in self.players[i].board_all_entries()
+                             if not x.destroyed and ability_of(x.cid)[0] != 'immune'])
+            if pool:
+                uid = yield self._target_request(tag, e, pool)
+                self._destroy_by_uid(uid, pool)
+            e.destroyed = True
+        elif tag == 'play_from_discard':
+            if self.discard and len(p.columns[rnd]) < 3:
+                choice = _to_py((yield {
+                    'type': 'ability_choice_discard', 'player': owner_i, 'card': e.cid,
+                    'card_name': name_of(e.cid), 'discard': list(self.discard),
+                }))
+                if choice in self.discard:
+                    self.discard.remove(choice)
+                    ne = Entry(choice, owner_i)
+                    p.columns[rnd].append(ne)
+                    self._played_this_combat[owner_i].append(ne)
+        elif tag == 'scry_draw':
+            n = min(params.get('n', 3), len(self.deck))
+            top = [self.deck.pop() for _ in range(n)]
+            if top:
+                choice = _to_py((yield {
+                    'type': 'ability_choice_scry', 'player': owner_i, 'card': e.cid,
+                    'card_name': name_of(e.cid), 'options': list(top),
+                }))
+                if choice in top:
+                    top.remove(choice)
+                    p.hand.append(choice)
+                self.deck = top + self.deck
+        elif tag == 'remove_ability':
+            pool_pairs = [(oi, x) for oi, x in all_entries_this_round
+                          if oi != owner_i and x is not e and not x.destroyed and not x.ability_disabled]
+            options = [x for _, x in pool_pairs]
+            if options:
+                uid = yield self._target_request(tag, e, options)
+                self._disable_by_uid(uid, options)
+        elif tag == 'move_self_round':
+            if params['round'] == rnd + 1 and others:
+                target = others[0]
+                if len(others) > 1:
+                    target = int(_to_py((yield {
+                        'type': 'ability_choice_opponent', 'player': owner_i, 'card': e.cid,
+                        'card_name': name_of(e.cid), 'options': others,
+                    })))
+                p.columns[rnd].remove(e)
+                e.owner = target
+                self.players[target].columns[rnd].append(e)
+        else:
+            self._resolve_ability(e, owner_i, rnd, joiners, all_entries_this_round)
+            return  # the shared resolver already applied the bean_balance update below
+
+        p.bean_balance += e.bean() if tag != 'draw_place_under' else 0
+
+    def snapshot(self):
+        """Full serializable game state for the UI to render between generator steps."""
+        return {
+            'players': [
+                {
+                    'idx': pl.idx,
+                    'hand': list(pl.hand) if pl.idx == self.human_idx else None,
+                    'hand_size': len(pl.hand),
+                    'trophies': pl.trophies,
+                    'wounded': pl.wound_pending,
+                    'columns': [
+                        [{'cid': x.cid, 'name': name_of(x.cid), 'power': x.power(),
+                          'bean': x.bean(), 'destroyed': x.destroyed, 'owner': x.owner}
+                         for x in col]
+                        for col in pl.columns
+                    ],
+                }
+                for pl in self.players
+            ],
+            'trader': list(self.trader),
+            'discard_top': self.discard[-1] if self.discard else None,
+            'discard_count': len(self.discard),
+            'deck_remaining': len(self.deck),
+            'human_idx': self.human_idx,
+        }
 
     def _combo_score(self, combo, round_index):
         """Planning-time Power estimate for a candidate combo, aware of round bonuses,
@@ -703,6 +1077,11 @@ class Game:
                         self.players[src_owner].columns[src_r].remove(target_entry)
                         target_entry.owner = dest
                         self.players[dest].columns[src_r].append(target_entry)
+                        # Captain Crunch follows the card it redirected to the same spot
+                        if e in p.columns[rnd]:
+                            p.columns[rnd].remove(e)
+                            e.owner = dest
+                            self.players[dest].columns[src_r].append(e)
         elif tag == 'move_own_out':
             mine = [x for x in p.board_all_entries()
                     if x is not e and not x.destroyed and ability_of(x.cid)[0] != 'immune']
@@ -806,6 +1185,55 @@ def run_game(n_players=4, max_turns=400):
             break
     winner = max(g.players, key=lambda pl: pl.trophies)
     return g, winner, turn
+
+
+_current_game = None  # exposes the Game instance living inside play_game_interactive's
+                       # frame to the browser, since a generator's locals aren't reachable
+                       # via pyodide.globals -- call get_snapshot() from JS instead
+
+
+def get_snapshot():
+    return _current_game.snapshot() if _current_game else None
+
+
+def play_game_interactive(n_players=4, human_idx=0, max_turns=400):
+    """Generator-driven full game with one human player among (n_players - 1) AI
+    opponents. Yields DecisionRequest dicts for every human decision (and a couple of
+    informational events); receives the human's answer via .send(). Call get_snapshot()
+    after every step to render full state -- the yielded payloads only carry what's
+    specific to that particular decision/event."""
+    global _current_game
+    g = Game(n_players, human_idx=human_idx)
+    _current_game = g
+    turn = 0
+    while turn < max_turns:
+        turn += 1
+        g.turns += 1
+        cur = turn % n_players
+        p = g.players[cur]
+        if cur == human_idx:
+            action = yield {'type': 'prepare_action', 'player': cur}
+            if action == 'challenge':
+                yield from g.run_combat_interactive(cur)
+            else:
+                yield from g.prepare_interactive(p)
+        else:
+            if g.wants_to_challenge(p):
+                yield from g.run_combat_interactive(cur)
+            else:
+                g.prepare(p)
+
+        if any(pl.trophies >= 3 for pl in g.players):
+            break
+
+    winner = max(g.players, key=lambda pl: pl.trophies)
+    yield {
+        'type': 'game_over',
+        'winner': winner.idx,
+        'trophies': [pl.trophies for pl in g.players],
+        'turns': turn,
+    }
+    return g
 
 
 def run_batch(n_games=3000, n_players=4, min_sample=30):

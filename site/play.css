@@ -1,0 +1,184 @@
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --text: #201f1c;
+  --text-dim: #6b675f;
+  --border: #e4e1d8;
+  --accent: #8a3b2e;
+  --good: #2f7a4f;
+  --bad: #b8452f;
+  --mid: #b08a2e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16151a; --surface: #201f26; --text: #ece9e2; --text-dim: #a6a29a;
+    --border: #35333c; --accent: #e0a37c; --good: #6fcf97; --bad: #f08a72; --mid: #e0c26c;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16151a; --surface: #201f26; --text: #ece9e2; --text-dim: #a6a29a;
+  --border: #35333c; --accent: #e0a37c; --good: #6fcf97; --bad: #f08a72; --mid: #e0c26c;
+}
+:root[data-theme="light"] {
+  --bg: #f7f6f2; --surface: #ffffff; --text: #201f1c; --text-dim: #6b675f;
+  --border: #e4e1d8; --accent: #8a3b2e; --good: #2f7a4f; --bad: #b8452f; --mid: #b08a2e;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); margin: 0; padding: 0 1rem 3rem; line-height: 1.45; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+
+header { padding: 1.5rem 0 1rem; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+h1 { font-size: 1.35rem; margin: 0; }
+header a { color: var(--accent); font-size: 0.85rem; text-decoration: none; }
+header a:hover { text-decoration: underline; }
+
+#loading { text-align: center; padding: 4rem 1rem; color: var(--text-dim); }
+#loading .spinner { font-size: 1.8rem; margin-bottom: 0.75rem; }
+
+.hidden { display: none !important; }
+
+.players-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.player-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+}
+.player-chip.is-human { border-color: var(--accent); }
+.player-chip .pname { font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+.player-chip .prow { color: var(--text-dim); font-size: 0.78rem; margin-top: 0.15rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.trophy { color: var(--mid); }
+.wound-badge { color: var(--bad); font-weight: 600; }
+
+.deck-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+}
+.deck-row .label { color: var(--text-dim); margin-right: 0.3rem; }
+.trader-cards { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+section.boards { margin-bottom: 1.2rem; }
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.7rem;
+}
+.board-player {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem;
+}
+.board-player h4 { margin: 0 0 0.4rem; font-size: 0.82rem; color: var(--text-dim); }
+.board-columns { display: flex; gap: 0.4rem; }
+.board-column { flex: 1; min-height: 40px; display: flex; flex-direction: column; gap: 0.3rem; }
+.board-column .round-label { font-size: 0.65rem; color: var(--text-dim); text-align: center; }
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  padding: 0.4rem 0.5rem;
+  font-size: 0.78rem;
+  cursor: default;
+  position: relative;
+  min-width: 84px;
+}
+.card .team-pill {
+  display: inline-block;
+  font-size: 0.62rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+.card .cname { font-weight: 600; margin-bottom: 0.2rem; }
+.card .cstats { display: flex; justify-content: space-between; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.card .cstats .bean::before { content: "🫘 "; }
+.card .cstats .power::before { content: "⚡ "; }
+.card.destroyed { opacity: 0.35; text-decoration: line-through; }
+.card.selectable { cursor: pointer; transition: transform 0.08s, border-color 0.08s; }
+.card.selectable:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card.selected { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--bg)); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent); }
+.card.disabled { opacity: 0.4; cursor: not-allowed; }
+.card.deck-back { background: repeating-linear-gradient(45deg, var(--border), var(--border) 4px, var(--surface) 4px, var(--surface) 8px); }
+
+.hand-section { margin-bottom: 1.2rem; }
+.hand-section h3 { font-size: 0.95rem; margin: 0 0 0.5rem; }
+.hand-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.decision-panel {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.2rem;
+}
+.decision-panel h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.decision-panel .prompt-note { color: var(--text-dim); font-size: 0.85rem; margin: 0 0 0.8rem; }
+.btn-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.7rem; }
+button {
+  font-family: inherit;
+  font-size: 0.88rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button:hover:not(:disabled) { filter: brightness(1.05); }
+
+.option-list { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.option-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+}
+.option-btn:hover { border-color: var(--accent); }
+.option-btn small { display: block; color: var(--text-dim); }
+
+.log-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  max-height: 220px;
+  overflow-y: auto;
+  font-size: 0.82rem;
+}
+.log-panel .log-line { padding: 0.15rem 0; border-bottom: 1px dashed var(--border); }
+.log-panel .log-line:last-child { border-bottom: none; }
+
+.game-over-banner {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+.game-over-banner .big { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }

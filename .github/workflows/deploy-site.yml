@@ -43,6 +43,9 @@ jobs:
           fi
           python3 simulate.py --games "${{ inputs.games || '5000' }}" $SEED_ARG --quiet --json site/data.json
 
+      - name: Copy engine source into the deployable site (play.html loads it via fetch)
+        run: cp simulate.py site/simulate.py
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

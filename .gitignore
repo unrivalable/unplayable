@@ -1,0 +1,3 @@
+# site/simulate.py is a build-time copy the deploy workflow creates so play.html can
+# fetch() the engine source -- keep the repo's single source of truth at the root.
+site/simulate.py

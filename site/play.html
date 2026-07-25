@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play — Unemployables: Unplayable</title>
+<link rel="stylesheet" href="play.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Unemployables: Unplayable — Play vs. AI</h1>
+    <a href="index.html">&larr; balance results</a>
+  </header>
+
+  <div id="loading">
+    <div class="spinner">🎴</div>
+    <div>Loading the Python rules engine (Pyodide)… this can take a few seconds the first time.</div>
+  </div>
+
+  <div id="game" class="hidden">
+    <div class="players-row" id="players-row"></div>
+
+    <div class="deck-row">
+      <div><span class="label">Deck:</span> <span id="deck-count">—</span> cards left</div>
+      <div><span class="label">Discard top:</span> <span id="discard-top"></span></div>
+      <div style="flex:1"></div>
+      <div><span class="label">Trader:</span></div>
+      <div class="trader-cards" id="trader-cards"></div>
+    </div>
+
+    <section class="boards">
+      <div class="board-grid" id="board-grid"></div>
+    </section>
+
+    <div id="game-over-wrap"></div>
+
+    <div class="decision-panel" id="decision-panel"></div>
+
+    <div class="hand-section">
+      <h3>Your hand</h3>
+      <div class="hand-row" id="hand-row"></div>
+    </div>
+
+    <div class="log-panel" id="log-panel"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script src="play.js"></script>
+</body>
+</html>

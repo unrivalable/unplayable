@@ -33,7 +33,7 @@ text — see review-findings.md question 1k).
 | 4 | Handfoot | 3 | 2 | VU | Round 2: Flip this card | — | Yes — flip swaps Bean/Power to 2 Bean / 3 Power (confirmed by designer) | Flip is a Bean/Power swap here, vs. Craig 8 (#53) which flips to a wholly new stat line (2/2 → 4/0). Two different flavors of "flip" — both intentional, no fix needed. |
 | 5 | Burger King | 3 | 1 | VU | *(blank — vanilla)* | — | — | |
 | 6 | Defrilibatorator | -1 | 1 | BOLT | Choose a card from the discard pile and play it to this round | — | — | Likely intentional joke name (riff on "defibrillator") |
-| 7 | Captain Crunch | -2 | 2 | BOLT | **REDESIGNED** — old text: "Choose an opponent's board: move this card and another card of your choice to it" | — | — | Old version simulated as the worst card in the deck (self-harming, no benefit). New design (stats unchanged): move the strongest card among the other combat participants onto whichever of them is currently weakest — pure threat redistribution, no self-harm. Card text needs reprinting to match (see review-findings.md Section 3). |
+| 7 | Captain Crunch | -1 | 2 | BOLT | **REDESIGNED (twice)** — original text: "Choose an opponent's board: move this card and another card of your choice to it" | — | — | v1: self-harming (worst card in deck). v2: moved only the strongest opposing card to the weakest opponent, no self-harm (~40% win rate). v3 (current): also follows the card it redirects to the same destination — owner now sacrifices Captain Crunch's own Power too. Bean cost cut -2→-1 to compensate, but simulated win rate still dropped to ~25%, one of the weaker cards now. Card text needs reprinting to match (see review-findings.md Section 3 and 6). |
 | 8 | Floss | 0 | 2 | BOLT | At any time, you may destroy this card to destroy another card of your choice | — | — | |
 | 9 | Snow Angel | 2 | 1 | BOLT | Combo: Captain Christingle — +2 Beans, +2 Power | ↔ #47 Captain Christingle | — | |
 | 10 | Brain Freeze | 2 | 1 | BOLT | +1 Bean for every other card you play this round | — | — | **Card artwork is completely blank/white** — needs finished art before printing |
@@ -53,7 +53,7 @@ text — see review-findings.md question 1k).
 | 24 | They | 0 | 1 | HAWK | Combo: Moonhawk — Destroy this card | ↔ #20 Moonhawk | — | |
 | 25 | The Corn Maiden | 5 | 0 | HAWK | *(blank — vanilla)* | — | — | Highest Bean value in the deck |
 | 26 | Voodude | -2 | 2 | V | **REDESIGNED** — old text: "Swap places with any card on the board" | — | — | Old version simulated as the strongest card in the deck (a free steal). New design (stats unchanged): destroy the strongest card anywhere in play, then Voodude moves into that card's former board/column slot. Card text needs reprinting to match (see review-findings.md Section 3). |
-| 27 | Mute-Ant | -3 | 2 | V | Destroy any card | — | — | |
+| 27 | Mute-Ant | -3 | 1 | V | Destroy any card | — | — | Power reduced 2→1 (was the single strongest card in the deck by simulated win rate). |
 | 28 | Footrun Joyfun | 0 | 1 | V | Combo: Jetplace Joyface + Junkrat Crotchrocket — +1 Bean | ↔ #29, #30 | — | 3-card combo group |
 | 29 | Jetplace Joyface | 0 | 1 | V | Combo: Footrun Joyfun + Junkrat Crotchrocket — Draw a card | ↔ #28, #30 | — | 3-card combo group |
 | 30 | Junkrat Crotchrocket | 0 | 1 | V | Combo: Footrun Joyfun + Jetplace Joyface — Destroy one card from every other player | ↔ #28, #29 | — | 3-card combo group; strongest effect of the trio — see balance notes |
@@ -76,7 +76,7 @@ text — see review-findings.md question 1k).
 | 47 | Captain Christingle | 1 | 2 | TOPHAT | Combo: Snow Angel — +2 Beans, +2 Power | ↔ #9 Snow Angel | — | |
 | 48 | Proctor Odd | 0 | 1 | NODES | Draw a card and place it under this one; it's power level is now this card's bean level | — | — | Grammar: "it's" → "its". Also clarify: does the *placed* card's Power become equal to Proctor Odd's Bean value, or vice versa? Wording is ambiguous. |
 | 49 | Belt Tungus | -2 | 1 | NODES | Steal a random card from any player's hand | — | — | |
-| 50 | Accordion Joe | -1 | 0 | NODES | Choose any card that was played this round and remove its ability | — | — | Grammar: "it's" → "its" was flagged in earlier scan — printed text here actually reads "its" correctly; recheck against PDF page during final proofread pass |
+| 50 | Accordion Joe | -1 | 1 | NODES | Choose any card that was played this round and remove its ability | — | — | Power increased 0→1. Grammar: "it's" → "its" was flagged in earlier scan — printed text here actually reads "its" correctly; recheck against PDF page during final proofread pass |
 | 51 | Pakrat | 2 | 2 | NODES | Draw a card and play it to this round | — | — | |
 | 52 | Glubsmack McDougie | 1 | 2 | NODES | Round 3: +1 Bean, +1 Power | — | — | |
 | 53 | Craig 8 | 2 | 2 | NODES | You can flip this card when played | — | Yes — flip changes stats to 4 Bean / 0 Power | Flip gives a wholly new stat line here, vs. Handfoot (#4) which swaps Bean/Power. Two different flavors of "flip" — both intentional, no fix needed. |

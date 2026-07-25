@@ -65,7 +65,19 @@ body {
 
 header {
   padding: 2.5rem 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
+
+header a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+header a:hover { text-decoration: underline; }
 
 h1 {
   font-size: 1.6rem;

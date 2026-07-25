@@ -207,3 +207,27 @@ just being theoretical concerns):
 **Bottom line:** all structural rules questions (1a–1e) are now resolved and reflected in the
 rulebook. The remaining open items are narrower text/wording fixes (1f, 1g) and the copyedit list
 in Section 3 — nothing left blocks playtesting any hand in the deck.
+
+---
+
+## 6. Post-launch balance tweaks (after building the playable web version)
+
+Made directly against `simulate.py`, verified via a fresh 5,000-game batch (seed 42):
+
+- **Mute-Ant** (#27): Power 2 → 1. (Bean unchanged at -3.)
+- **Accordion Joe** (#50): Power 0 → 1. (Bean unchanged at -1.)
+- **Captain Crunch** (#7): Bean -2 → -1 (cheaper), **and redesigned again** — it now follows the
+  card it redirects to the same destination board/column, not just moving the target while staying
+  home. This means Captain Crunch's owner now also gives up its own 2 Power to whichever opponent
+  it moved the threat to, not just denying that Power to the original threat's owner.
+
+**Finding:** despite being 1 Bean cheaper, Captain Crunch's simulated win rate **dropped from
+~40% to 25.2%** — now one of the weaker cards in the deck, lower than before this round of changes.
+The self-relocation is a real cost (the owner sacrifices their own card's Power to a rival, on top
+of redirecting the threat) that outweighs the cheaper cost. Flagging this since it's a significant,
+possibly unintended swing — worth a look if Captain Crunch feels too weak in actual play; a Power
+bump would be the natural lever if so.
+
+Card text for Captain Crunch, Voodude, and now these three additional cards still needs to be
+reprinted to match current stats/abilities before the physical deck goes to print (see Section 3
+for suggested wording — Captain Crunch's text should now also mention it follows its target).
