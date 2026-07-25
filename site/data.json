@@ -1,0 +1,633 @@
+{
+  "games": 5000,
+  "players": 4,
+  "pacing": {
+    "avg_turns": 17.959,
+    "min_turns": 2,
+    "max_turns": 59,
+    "avg_combats": 4.4466,
+    "avg_unopposed": 0.4862,
+    "unopposed_pct": 0.10934196914496469,
+    "avg_wounds": 4.1024,
+    "seat_win_rate": [
+      0.2134,
+      0.2736,
+      0.2628,
+      0.2502
+    ]
+  },
+  "combos": [
+    {
+      "name": "snow_christingle",
+      "total": 1794,
+      "per_game": 0.3588
+    },
+    {
+      "name": "ironpan_dishwasher",
+      "total": 1462,
+      "per_game": 0.2924
+    },
+    {
+      "name": "trio",
+      "total": 36,
+      "per_game": 0.0072
+    }
+  ],
+  "teams": [
+    {
+      "team": "NONE",
+      "played": 4229,
+      "win_rate": 0.32466304090801607
+    },
+    {
+      "team": "V",
+      "played": 26656,
+      "win_rate": 0.3834408763505402
+    },
+    {
+      "team": "BOLT",
+      "played": 38876,
+      "win_rate": 0.4122080460952773
+    },
+    {
+      "team": "HAWK",
+      "played": 24542,
+      "win_rate": 0.41638823241789585
+    },
+    {
+      "team": "TOPHAT",
+      "played": 33450,
+      "win_rate": 0.4286397608370702
+    },
+    {
+      "team": "NODES",
+      "played": 34067,
+      "win_rate": 0.4302991164470015
+    },
+    {
+      "team": "VU",
+      "played": 33168,
+      "win_rate": 0.4346056439942113
+    },
+    {
+      "team": "RED2",
+      "played": 49744,
+      "win_rate": 0.4357912512061756
+    },
+    {
+      "team": "Y",
+      "played": 47378,
+      "win_rate": 0.4456287728481574
+    },
+    {
+      "team": "TURTLE",
+      "played": 22541,
+      "win_rate": 0.4466971296748148
+    }
+  ],
+  "cards": [
+    {
+      "id": 20,
+      "name": "Moonhawk",
+      "team": "HAWK",
+      "bean": -2,
+      "power": -6,
+      "played": 19,
+      "win_rate": 0.0,
+      "low_sample": true
+    },
+    {
+      "id": 44,
+      "name": "Grup Scrooge",
+      "team": "TOPHAT",
+      "bean": -1,
+      "power": -3,
+      "played": 52,
+      "win_rate": 0.2692307692307692,
+      "low_sample": false
+    },
+    {
+      "id": 18,
+      "name": "Digeridon't",
+      "team": "RED2",
+      "bean": 1,
+      "power": 0,
+      "played": 651,
+      "win_rate": 0.29185867895545314,
+      "low_sample": false
+    },
+    {
+      "id": 26,
+      "name": "Voodude",
+      "team": "V",
+      "bean": -2,
+      "power": 2,
+      "played": 4440,
+      "win_rate": 0.3047297297297297,
+      "low_sample": false
+    },
+    {
+      "id": 24,
+      "name": "They",
+      "team": "HAWK",
+      "bean": 0,
+      "power": 1,
+      "played": 4171,
+      "win_rate": 0.3241428913929513,
+      "low_sample": false
+    },
+    {
+      "id": 54,
+      "name": "Port Melanin",
+      "team": "NONE",
+      "bean": 0,
+      "power": 1,
+      "played": 4229,
+      "win_rate": 0.32466304090801607,
+      "low_sample": false
+    },
+    {
+      "id": 48,
+      "name": "Proctor Odd",
+      "team": "NODES",
+      "bean": 0,
+      "power": 1,
+      "played": 4239,
+      "win_rate": 0.3338051427223402,
+      "low_sample": false
+    },
+    {
+      "id": 29,
+      "name": "Jetplace Joyface",
+      "team": "V",
+      "bean": 0,
+      "power": 1,
+      "played": 4107,
+      "win_rate": 0.34136839542244946,
+      "low_sample": false
+    },
+    {
+      "id": 30,
+      "name": "Junkrat Crotchrocket",
+      "team": "V",
+      "bean": 0,
+      "power": 1,
+      "played": 4226,
+      "win_rate": 0.34216753431140556,
+      "low_sample": false
+    },
+    {
+      "id": 28,
+      "name": "Footrun Joyfun",
+      "team": "V",
+      "bean": 0,
+      "power": 1,
+      "played": 4228,
+      "win_rate": 0.3434247871333964,
+      "low_sample": false
+    },
+    {
+      "id": 1,
+      "name": "Mr Unemployable",
+      "team": "VU",
+      "bean": 0,
+      "power": 1,
+      "played": 4285,
+      "win_rate": 0.3528588098016336,
+      "low_sample": false
+    },
+    {
+      "id": 41,
+      "name": "Debit",
+      "team": "Y",
+      "bean": 0,
+      "power": 1,
+      "played": 4272,
+      "win_rate": 0.35463483146067415,
+      "low_sample": false
+    },
+    {
+      "id": 13,
+      "name": "Bitey Whiteys",
+      "team": "RED2",
+      "bean": -3,
+      "power": 6,
+      "played": 7091,
+      "win_rate": 0.36271329854745454,
+      "low_sample": false
+    },
+    {
+      "id": 3,
+      "name": "Porthole",
+      "team": "VU",
+      "bean": 1,
+      "power": 1,
+      "played": 5570,
+      "win_rate": 0.3732495511669659,
+      "low_sample": false
+    },
+    {
+      "id": 14,
+      "name": "Speedo",
+      "team": "RED2",
+      "bean": 4,
+      "power": 1,
+      "played": 8455,
+      "win_rate": 0.37681845062093433,
+      "low_sample": false
+    },
+    {
+      "id": 8,
+      "name": "Floss",
+      "team": "BOLT",
+      "bean": 0,
+      "power": 2,
+      "played": 7605,
+      "win_rate": 0.3784352399737015,
+      "low_sample": false
+    },
+    {
+      "id": 50,
+      "name": "Accordion Joe",
+      "team": "NODES",
+      "bean": -1,
+      "power": 0,
+      "played": 58,
+      "win_rate": 0.3793103448275862,
+      "low_sample": false
+    },
+    {
+      "id": 43,
+      "name": "Machete Man",
+      "team": "TOPHAT",
+      "bean": -2,
+      "power": 1,
+      "played": 1903,
+      "win_rate": 0.38623226484498163,
+      "low_sample": false
+    },
+    {
+      "id": 7,
+      "name": "Captain Crunch",
+      "team": "BOLT",
+      "bean": -2,
+      "power": 2,
+      "played": 4457,
+      "win_rate": 0.39286515593448507,
+      "low_sample": false
+    },
+    {
+      "id": 6,
+      "name": "Defrilibatorator",
+      "team": "BOLT",
+      "bean": -1,
+      "power": 1,
+      "played": 2562,
+      "win_rate": 0.39305230288836845,
+      "low_sample": false
+    },
+    {
+      "id": 34,
+      "name": "Contortoise",
+      "team": "TURTLE",
+      "bean": 1,
+      "power": 2,
+      "played": 8972,
+      "win_rate": 0.39456085599643337,
+      "low_sample": false
+    },
+    {
+      "id": 10,
+      "name": "Brain Freeze",
+      "team": "BOLT",
+      "bean": 2,
+      "power": 1,
+      "played": 6571,
+      "win_rate": 0.39522142748440114,
+      "low_sample": false
+    },
+    {
+      "id": 49,
+      "name": "Belt Tungus",
+      "team": "NODES",
+      "bean": -2,
+      "power": 1,
+      "played": 1934,
+      "win_rate": 0.40072388831437433,
+      "low_sample": false
+    },
+    {
+      "id": 46,
+      "name": "Bee's Knees",
+      "team": "TOPHAT",
+      "bean": 0,
+      "power": 2,
+      "played": 9227,
+      "win_rate": 0.4014305841551967,
+      "low_sample": false
+    },
+    {
+      "id": 25,
+      "name": "The Corn Maiden",
+      "team": "HAWK",
+      "bean": 5,
+      "power": 0,
+      "played": 3738,
+      "win_rate": 0.4055644729802033,
+      "low_sample": false
+    },
+    {
+      "id": 31,
+      "name": "Dishwasher",
+      "team": "V",
+      "bean": 2,
+      "power": 1,
+      "played": 6667,
+      "win_rate": 0.4111294435278236,
+      "low_sample": false
+    },
+    {
+      "id": 40,
+      "name": "Yeast",
+      "team": "Y",
+      "bean": 0,
+      "power": 2,
+      "played": 9265,
+      "win_rate": 0.42061521856449,
+      "low_sample": false
+    },
+    {
+      "id": 52,
+      "name": "Glubsmack McDougie",
+      "team": "NODES",
+      "bean": 1,
+      "power": 2,
+      "played": 9266,
+      "win_rate": 0.42197280379883445,
+      "low_sample": false
+    },
+    {
+      "id": 42,
+      "name": "Shan't Dance",
+      "team": "TOPHAT",
+      "bean": 1,
+      "power": 1,
+      "played": 5445,
+      "win_rate": 0.42295684113865933,
+      "low_sample": false
+    },
+    {
+      "id": 23,
+      "name": "Iron Pan",
+      "team": "HAWK",
+      "bean": -1,
+      "power": 2,
+      "played": 7301,
+      "win_rate": 0.4277496233392686,
+      "low_sample": false
+    },
+    {
+      "id": 5,
+      "name": "Burger King",
+      "team": "VU",
+      "bean": 3,
+      "power": 1,
+      "played": 8996,
+      "win_rate": 0.42830146731880836,
+      "low_sample": false
+    },
+    {
+      "id": 9,
+      "name": "Snow Angel",
+      "team": "BOLT",
+      "bean": 2,
+      "power": 1,
+      "played": 6692,
+      "win_rate": 0.43350268977884043,
+      "low_sample": false
+    },
+    {
+      "id": 33,
+      "name": "Captain Trumpet",
+      "team": "TURTLE",
+      "bean": 1,
+      "power": 1,
+      "played": 5541,
+      "win_rate": 0.43782710702039346,
+      "low_sample": false
+    },
+    {
+      "id": 45,
+      "name": "Shoulder Blades",
+      "team": "TOPHAT",
+      "bean": -2,
+      "power": 6,
+      "played": 7625,
+      "win_rate": 0.44104918032786883,
+      "low_sample": false
+    },
+    {
+      "id": 22,
+      "name": "Displeased Avian",
+      "team": "HAWK",
+      "bean": -3,
+      "power": 2,
+      "played": 2894,
+      "win_rate": 0.4416033172080166,
+      "low_sample": false
+    },
+    {
+      "id": 12,
+      "name": "Chair Beard",
+      "team": "BOLT",
+      "bean": 0,
+      "power": 5,
+      "played": 9470,
+      "win_rate": 0.44371700105596623,
+      "low_sample": false
+    },
+    {
+      "id": 39,
+      "name": "Winter Wondergirl",
+      "team": "Y",
+      "bean": -1,
+      "power": 2,
+      "played": 7156,
+      "win_rate": 0.4459195081050866,
+      "low_sample": false
+    },
+    {
+      "id": 53,
+      "name": "Craig 8",
+      "team": "NODES",
+      "bean": 2,
+      "power": 2,
+      "played": 9346,
+      "win_rate": 0.4512090734003852,
+      "low_sample": false
+    },
+    {
+      "id": 11,
+      "name": "Man Guy",
+      "team": "BOLT",
+      "bean": -4,
+      "power": 2,
+      "played": 1519,
+      "win_rate": 0.45358788676761025,
+      "low_sample": false
+    },
+    {
+      "id": 47,
+      "name": "Captain Christingle",
+      "team": "TOPHAT",
+      "bean": 1,
+      "power": 2,
+      "played": 9198,
+      "win_rate": 0.45868667101543814,
+      "low_sample": false
+    },
+    {
+      "id": 21,
+      "name": "Guy Yacht",
+      "team": "HAWK",
+      "bean": -3,
+      "power": 3,
+      "played": 6419,
+      "win_rate": 0.4595731422339928,
+      "low_sample": false
+    },
+    {
+      "id": 36,
+      "name": "Powerpoint",
+      "team": "Y",
+      "bean": 2,
+      "power": 2,
+      "played": 9274,
+      "win_rate": 0.4598878585292215,
+      "low_sample": false
+    },
+    {
+      "id": 17,
+      "name": "Jonnakiss",
+      "team": "RED2",
+      "bean": 2,
+      "power": 2,
+      "played": 9439,
+      "win_rate": 0.4620192817035703,
+      "low_sample": false
+    },
+    {
+      "id": 15,
+      "name": "Faceplant",
+      "team": "RED2",
+      "bean": 2,
+      "power": 2,
+      "played": 9382,
+      "win_rate": 0.46663824344489446,
+      "low_sample": false
+    },
+    {
+      "id": 16,
+      "name": "Ultraviolet",
+      "team": "RED2",
+      "bean": 2,
+      "power": 1,
+      "played": 6531,
+      "win_rate": 0.46669728984841524,
+      "low_sample": false
+    },
+    {
+      "id": 51,
+      "name": "Pakrat",
+      "team": "NODES",
+      "bean": 2,
+      "power": 2,
+      "played": 9224,
+      "win_rate": 0.4683434518647008,
+      "low_sample": false
+    },
+    {
+      "id": 38,
+      "name": "Jeanne Gris",
+      "team": "Y",
+      "bean": 2,
+      "power": 2,
+      "played": 9378,
+      "win_rate": 0.46971635743228835,
+      "low_sample": false
+    },
+    {
+      "id": 37,
+      "name": "Tickle Monster",
+      "team": "Y",
+      "bean": -1,
+      "power": 3,
+      "played": 8033,
+      "win_rate": 0.4780281339474667,
+      "low_sample": false
+    },
+    {
+      "id": 4,
+      "name": "Handfoot",
+      "team": "VU",
+      "bean": 3,
+      "power": 2,
+      "played": 9381,
+      "win_rate": 0.47958639803858866,
+      "low_sample": false
+    },
+    {
+      "id": 19,
+      "name": "Grom",
+      "team": "RED2",
+      "bean": -1,
+      "power": 3,
+      "played": 8195,
+      "win_rate": 0.4811470408785845,
+      "low_sample": false
+    },
+    {
+      "id": 32,
+      "name": "Smurtle Gurtle Cheesecake Woman",
+      "team": "TURTLE",
+      "bean": 1,
+      "power": 1,
+      "played": 5491,
+      "win_rate": 0.49298852668002185,
+      "low_sample": false
+    },
+    {
+      "id": 2,
+      "name": "James Madison",
+      "team": "VU",
+      "bean": -5,
+      "power": 6,
+      "played": 4936,
+      "win_rate": 0.5008103727714749,
+      "low_sample": false
+    },
+    {
+      "id": 35,
+      "name": "Gym Shark",
+      "team": "TURTLE",
+      "bean": -7,
+      "power": 7,
+      "played": 2537,
+      "win_rate": 0.5502562081198266,
+      "low_sample": false
+    },
+    {
+      "id": 27,
+      "name": "Mute-Ant",
+      "team": "V",
+      "bean": -3,
+      "power": 2,
+      "played": 2988,
+      "win_rate": 0.6114457831325302,
+      "low_sample": false
+    }
+  ],
+  "min_sample": 30,
+  "generated_at": "2026-07-25T06:16:22.567320+00:00",
+  "seed": 42
+}

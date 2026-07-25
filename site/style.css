@@ -1,0 +1,254 @@
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --text: #201f1c;
+  --text-dim: #6b675f;
+  --border: #e4e1d8;
+  --accent: #8a3b2e;
+  --good: #2f7a4f;
+  --bad: #b8452f;
+  --mid: #b08a2e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16151a;
+    --surface: #201f26;
+    --text: #ece9e2;
+    --text-dim: #a6a29a;
+    --border: #35333c;
+    --accent: #e0a37c;
+    --good: #6fcf97;
+    --bad: #f08a72;
+    --mid: #e0c26c;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #16151a;
+  --surface: #201f26;
+  --text: #ece9e2;
+  --text-dim: #a6a29a;
+  --border: #35333c;
+  --accent: #e0a37c;
+  --good: #6fcf97;
+  --bad: #f08a72;
+  --mid: #e0c26c;
+}
+:root[data-theme="light"] {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --text: #201f1c;
+  --text-dim: #6b675f;
+  --border: #e4e1d8;
+  --accent: #8a3b2e;
+  --good: #2f7a4f;
+  --bad: #b8452f;
+  --mid: #b08a2e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0 1.25rem 4rem;
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+header {
+  padding: 2.5rem 0 1rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.meta {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+
+.stat-card .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-bottom: 0.3rem;
+}
+
+.stat-card .value {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+section {
+  margin-bottom: 2.75rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+}
+
+.section-note {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+  max-width: 65ch;
+}
+
+.controls {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+input[type="search"], select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+input[type="search"] {
+  flex: 1;
+  min-width: 160px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.88rem;
+  min-width: 480px;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+th {
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+}
+
+th.sorted::after {
+  content: " " attr(data-dir);
+  opacity: 0.6;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.rate-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bar-track {
+  width: 70px;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+
+.low-sample {
+  opacity: 0.55;
+}
+
+.low-sample .pill {
+  background: var(--border);
+  color: var(--text-dim);
+}
+
+footer {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+footer a { color: var(--accent); }
+
+.seat-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.seat-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+}
