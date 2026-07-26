@@ -231,3 +231,28 @@ bump would be the natural lever if so.
 Card text for Captain Crunch, Voodude, and now these three additional cards still needs to be
 reprinted to match current stats/abilities before the physical deck goes to print (see Section 3
 for suggested wording — Captain Crunch's text should now also mention it follows its target).
+
+## 7. Engine bugs found via actual playtesting (fixed)
+
+Playing the game surfaced two real bugs that thousands of AI-vs-AI batch simulations never
+exposed, since they only manifest from a *player's* perspective:
+
+- **Wound double-penalty**: the post-combat "draw until you have 7 cards" step was incorrectly
+  checking Wound status and capping at 6 immediately, on top of the *separate*, correct Wound cap
+  already applied at the player's next Prepare phase. A wounded player's hand was silently
+  settling at **5 cards instead of 6** (double-punished). Rulebook confirms post-combat is always
+  "draw until 7," full stop — the Wound only affects the next Prepare phase specifically. Fixed in
+  both the AI batch path and the playable version; this bug had been present since the simulator
+  was first built, so it was baked into every balance number in this document. The effect on
+  aggregate results is likely minor (hand-starvation is a second-order effect on most cards) but
+  worth flagging as a caveat on all prior win-rate figures.
+- **Bean affordability wasn't enforced at all** when playing cards interactively — you could play
+  any card regardless of Bean cost. Fixed with a validator that checks the whole selected set's
+  Bean total together (not card-by-card in whatever order they were clicked, which would wrongly
+  reject an affordable combo just because the expensive card was clicked before its covering
+  cards). The playable UI now also greys out cards you can't currently afford, with a live
+  projected-balance readout, so this should be caught before submission rather than after.
+
+Both were exercised and verified via direct unit tests plus repeated automated full-game
+playthroughs (both a pure-Python driver and a real headless-browser driver clicking through the
+actual UI) before and after the fix.

@@ -148,6 +148,13 @@ function renderBoards() {
   });
 }
 
+function projectedBeanBalance() {
+  if (!currentReq || currentReq.type !== "round_play") return null;
+  const base = currentReq.bean_balance;
+  const selectedBean = selectedCardIds().reduce((sum, cid) => sum + (cardMeta[cid]?.bean || 0), 0);
+  return base + selectedBean;
+}
+
 function renderHand() {
   const wrap = document.getElementById("hand-row");
   wrap.innerHTML = "";
@@ -155,15 +162,20 @@ function renderHand() {
   const selecting = currentReq && (currentReq.type === "round_play" || currentReq.type === "prepare_discard");
   const cap = currentReq && currentReq.type === "round_play" ? currentReq.max_slots
     : currentReq && currentReq.type === "prepare_discard" ? currentReq.count : null;
+  const isRoundPlay = currentReq && currentReq.type === "round_play";
+  const balanceSoFar = isRoundPlay ? projectedBeanBalance() : null;
 
   hand.forEach((cid, i) => {
     const key = i; // use index so duplicate ids are distinguishable
     const isSelected = selectedCards.has(key);
     const atCap = cap !== null && selectedCards.size >= cap && !isSelected;
+    const bean = cardMeta[cid]?.bean || 0;
+    const unaffordable = isRoundPlay && !isSelected && bean < 0 && (balanceSoFar + bean) < 0;
     wrap.appendChild(cardEl(cid, {
       selectable: selecting,
       selected: isSelected,
-      disabled: selecting && atCap,
+      disabled: selecting && (atCap || unaffordable),
+      subtitle: unaffordable ? "(not enough Beans)" : "",
       onClick: selecting ? () => {
         if (isSelected) selectedCards.delete(key); else selectedCards.add(key);
         renderHand();
@@ -237,7 +249,8 @@ function renderDecisionPanel() {
     panel.appendChild(row);
 
   } else if (t === "round_play") {
-    panel.innerHTML = `<h3>Round ${currentReq.round}: choose cards to play</h3><p class="prompt-note">Pick up to ${currentReq.max_slots} cards from your hand below. Bean balance so far: ${currentReq.bean_balance}.</p>`;
+    const proj = projectedBeanBalance();
+    panel.innerHTML = `<h3>Round ${currentReq.round}: choose cards to play</h3><p class="prompt-note">Pick up to ${currentReq.max_slots} cards from your hand below. Projected Bean balance: <strong style="color:${proj < 0 ? 'var(--bad)' : 'inherit'}">${proj}</strong> (cards you can't afford yet are greyed out).</p>`;
     const row = document.createElement("div");
     row.className = "btn-row";
     row.appendChild(mkBtn(`Play ${selectedCards.size} card(s)`, "primary", () => {

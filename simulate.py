@@ -532,8 +532,9 @@ class Game:
             p = self.players[i]
             for cid in [e.cid for e in p.board_all_entries()]:
                 self.discard.append(cid)
-            target = 6 if p.wound_pending else 7
-            need = max(0, target - len(p.hand))
+            # Always draw back to 7 here -- the Wound only caps the *next* Prepare phase's
+            # draw (handled in prepare()/prepare_interactive()), not this immediate refill.
+            need = max(0, 7 - len(p.hand))
             self.draw_to_hand(p, need)
             p.columns = [[], [], []]
 
@@ -550,6 +551,40 @@ class Game:
         if p.extra_slot_used:
             return 3
         return 4 if any(ability_of(c)[0] == 'extra_slot' for c in p.hand) else 3
+
+    def _validate_round_play(self, p, chosen, rnd):
+        """Defensive server-side enforcement of the round-size cap and Bean affordability
+        (the rulebook: a negative-Bean Hero can only be played if enough Beans were
+        generated earlier in the combat OR DURING THE CURRENT ROUND -- cards revealed
+        simultaneously, so the whole set's aggregate Bean total is what matters, not the
+        order the human happened to click them in). The UI is expected to prevent invalid
+        picks in the first place; this is just a backstop so the engine can never end up
+        in an illegal state.
+
+        Checks the full requested set as a whole first (order-independent); only falls
+        back to a Bean-value-descending greedy trim if the whole set genuinely isn't
+        affordable together."""
+        cap = self._max_round_slots(p)
+        hand_pool = list(p.hand)
+        filtered = []
+        for cid in chosen:
+            if cid in hand_pool:
+                hand_pool.remove(cid)
+                filtered.append(cid)
+        filtered = filtered[:cap]
+
+        if p.bean_balance + self._combo_bean(filtered, rnd) >= 0:
+            return filtered
+
+        balance = p.bean_balance
+        valid = []
+        for cid in sorted(filtered, key=base_bean, reverse=True):
+            b = base_bean(cid)
+            if b < 0 and balance + b < 0:
+                continue
+            balance += b
+            valid.append(cid)
+        return valid
 
     def run_combat_interactive(self, challenger):
         """Generator version of run_combat() for a game with a human player. Identical
@@ -605,7 +640,7 @@ class Game:
                         'bean_balance': p.bean_balance,
                         'max_slots': self._max_round_slots(p),
                     }))
-                    for cid in chosen[:4]:
+                    for cid in self._validate_round_play(p, chosen, rnd):
                         if cid in p.hand:
                             p.hand.remove(cid)
                             e = Entry(cid, i)
@@ -669,8 +704,9 @@ class Game:
             p = self.players[i]
             for cid in [e.cid for e in p.board_all_entries()]:
                 self.discard.append(cid)
-            target = 6 if p.wound_pending else 7
-            need = max(0, target - len(p.hand))
+            # Always draw back to 7 here -- the Wound only caps the *next* Prepare phase's
+            # draw (handled in prepare()/prepare_interactive()), not this immediate refill.
+            need = max(0, 7 - len(p.hand))
             self.draw_to_hand(p, need)
             p.columns = [[], [], []]
 
