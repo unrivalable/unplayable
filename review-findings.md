@@ -256,3 +256,49 @@ exposed, since they only manifest from a *player's* perspective:
 Both were exercised and verified via direct unit tests plus repeated automated full-game
 playthroughs (both a pure-Python driver and a real headless-browser driver clicking through the
 actual UI) before and after the fix.
+
+---
+
+## 8. Reprinted PDF diff (2026-07-26)
+
+The designer reprinted `Unplayable 2.pdf` with a round of balance/wording changes. Re-scanned all
+54 pages and diffed against the state recorded in `card-database.md`; findings folded into that
+file's per-card rows and its "Second pass" section. Summary here for the balance-relevant pieces:
+
+**Straightforward stat/name changes** (all applied to `simulate.py` and re-simulated):
+Grom → "Grom From Brawl Stars" (rename only), They's Bean 0→2, Voodude's Power 2→1, Smurtle Gurtle
+Cheesecake Woman's Bean 1→0, Grup Scrooge's Bean -1→0, Shoulder Blades → "Shoulder Blade" (rename
+only), Glubsmack McDougie's Round 3 bonus Bean flipped +1→-1, Port Melanin's solo-play bonus
++3→+4 Power.
+
+**Confirmed fixes to previously-logged issues**: Brain Freeze's blank artwork is fixed. Grup
+Scrooge's "opponent's area" is now "opponent's board." Debit's ambiguous "extra Beans" is now
+"leftover Beans." Voodude's printed text now explicitly matches our destroy-and-reposition
+redesign, confirming that design was the right call.
+
+**Remaining stale text**: Captain Crunch is now the only card whose printed ability text doesn't
+match its actual (redesigned) behavior — its Bean cost was updated to -1 in the reprint, but the
+ability text is still the pre-redesign wording. Needs a final reprint pass whenever convenient.
+
+### Belt Tungus (#49): complete rework, needed new game logic
+
+Not a stat tweak — the old ability ("Steal a random card from any player's hand," -2 Bean/1 Power)
+was fully replaced with a passive, reactive-from-hand effect (0 Bean/2 Power): **"If one of your
+cards is destroyed while this is in your hand, this card immediately replaces it."**
+
+This doesn't fit the existing "resolve an ability when the card is played" model — it triggers on
+someone *else's* action (a destroy), while Belt Tungus is sitting unplayed in hand. Implementation:
+every one of the 9 places in the engine that destroys a card (self-destructs like Floss, opponent
+kills like Mute-Ant/Machete Man, combo destroys like Junkrat Crotchrocket, Voodude's
+destroy-and-move, etc.) was routed through one new central method, `Game._mark_destroyed()`. That
+method marks the card destroyed, then checks whether the destroyed card's *owner* has Belt Tungus
+in hand — if so, it's removed from their hand and a fresh Belt Tungus entry appears in the same
+round's column, with its own printed stats. No player choice involved (it's not written as
+optional); if a player has 2 copies of Belt Tungus in hand, only one is consumed per destroy event,
+leaving the second available for a later destroy in the same combat.
+
+Verified via unit tests (fires when the owner has it in hand, doesn't fire when they don't, fires
+correctly on self-destruction, and is idempotent against double-calls) and via a full run through
+the actual interactive game generator (an opponent destroying a card while its owner holds Belt
+Tungus in hand correctly swaps it in) — plus the full regression suite (300-game batch CLI check,
+300-game Python-level interactive stress test, and a real headless-browser E2E pass), all clean.

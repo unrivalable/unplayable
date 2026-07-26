@@ -90,7 +90,9 @@ random.seed()
 #   ('draw_and_play', {})                # Pakrat
 #   ('play_from_discard', {})            # Defrilibatorator
 #   ('scry_draw', {'n':3})               # Porthole
-#   ('steal_random_hand', {})            # Belt Tungus
+#   (Belt Tungus has no active/on-play ability tag -- its "immediately replaces a
+#    destroyed card while in hand" effect is passive and handled centrally by
+#    Game._mark_destroyed(), triggered whenever ANY card is destroyed, not on play.)
 #   ('remove_ability', {})               # Accordion Joe
 #   ('draw_place_under', {})             # Proctor Odd
 #   ('move_self_round', {'round':n})     # Grup Scrooge
@@ -100,6 +102,8 @@ random.seed()
 #                                         # whichever other opponent is currently weakest
 #   ('combo', {'group': 'name'})         # named combo participant
 #   ('bean_per_other', {})               # Brain Freeze: +1 bean per other card played this round
+
+BELT_TUNGUS_ID = 49  # referenced by Game._mark_destroyed() for its reactive replacement ability
 
 CARDS = [
     (1, "Mr Unemployable", 0, 1, "VU", ('round_bonus', {3: {'power': 2}})),
@@ -120,20 +124,20 @@ CARDS = [
     (16, "Ultraviolet", 2, 1, "RED2", ('round_bonus', {1: {'power': 1}})),
     (17, "Jonnakiss", 2, 2, "RED2", ('none', {})),  # bounce-for-draw option unmodeled
     (18, "Digeridon't", 1, 0, "RED2", ('shield_round', {'round': 2})),
-    (19, "Grom", -1, 3, "RED2", ('round_bonus', {2: {'power': 1}})),
+    (19, "Grom From Brawl Stars", -1, 3, "RED2", ('round_bonus', {2: {'power': 1}})),
     (20, "Moonhawk", -2, -6, "HAWK", ('combo', {'group': 'moonhawk_they'})),
     (21, "Guy Yacht", -3, 3, "HAWK", ('immune', {})),
     (22, "Displeased Avian", -3, 2, "HAWK", ('move_own_out', {})),
     (23, "Iron Pan", -1, 2, "HAWK", ('combo', {'group': 'ironpan_dishwasher'})),
-    (24, "They", 0, 1, "HAWK", ('combo', {'group': 'moonhawk_they'})),
+    (24, "They", 2, 1, "HAWK", ('combo', {'group': 'moonhawk_they'})),
     (25, "The Corn Maiden", 5, 0, "HAWK", ('none', {})),
-    (26, "Voodude", -2, 2, "V", ('voodude_destroy_move', {})),
+    (26, "Voodude", -2, 1, "V", ('voodude_destroy_move', {})),
     (27, "Mute-Ant", -3, 1, "V", ('destroy_any', {})),
     (28, "Footrun Joyfun", 0, 1, "V", ('combo', {'group': 'trio'})),
     (29, "Jetplace Joyface", 0, 1, "V", ('combo', {'group': 'trio'})),
     (30, "Junkrat Crotchrocket", 0, 1, "V", ('combo', {'group': 'trio'})),
     (31, "Dishwasher", 2, 1, "V", ('combo', {'group': 'ironpan_dishwasher'})),
-    (32, "Smurtle Gurtle Cheesecake Woman", 1, 1, "TURTLE", ('round_bonus', {1: {'power': 3}})),
+    (32, "Smurtle Gurtle Cheesecake Woman", 0, 1, "TURTLE", ('round_bonus', {1: {'power': 3}})),
     (33, "Captain Trumpet", 1, 1, "TURTLE", ('round_bonus', {1: {'bean': 2}, 2: {'bean': 1, 'power': 1}, 3: {'power': 2}})),
     (34, "Contortoise", 1, 2, "TURTLE", ('extra_slot', {})),
     (35, "Gym Shark", -7, 7, "TURTLE", ('none', {})),
@@ -145,17 +149,17 @@ CARDS = [
     (41, "Debit", 0, 1, "Y", ('round_bonus_dynamic', {'round': 3, 'stat': 'extra_beans_half'})),
     (42, "Shan't Dance", 1, 1, "TOPHAT", ('round_bonus', {2: {'bean': 3}})),
     (43, "Machete Man", -2, 1, "TOPHAT", ('destroy_any_round', {'round': 3})),
-    (44, "Grup Scrooge", -1, -3, "TOPHAT", ('move_self_round', {'round': 1})),
-    (45, "Shoulder Blades", -2, 6, "TOPHAT", ('self_debuff', {'power': -2})),
+    (44, "Grup Scrooge", 0, -3, "TOPHAT", ('move_self_round', {'round': 1})),
+    (45, "Shoulder Blade", -2, 6, "TOPHAT", ('self_debuff', {'power': -2})),
     (46, "Bee's Knees", 0, 2, "TOPHAT", ('none', {})),
     (47, "Captain Christingle", 1, 2, "TOPHAT", ('combo', {'group': 'snow_christingle'})),
     (48, "Proctor Odd", 0, 1, "NODES", ('draw_place_under', {})),
-    (49, "Belt Tungus", -2, 1, "NODES", ('steal_random_hand', {})),
+    (49, "Belt Tungus", 0, 2, "NODES", ('none', {})),  # reactive-from-hand ability, see BELT_TUNGUS_ID / _mark_destroyed
     (50, "Accordion Joe", -1, 1, "NODES", ('remove_ability', {})),
     (51, "Pakrat", 2, 2, "NODES", ('draw_and_play', {})),
-    (52, "Glubsmack McDougie", 1, 2, "NODES", ('round_bonus', {3: {'bean': 1, 'power': 1}})),
+    (52, "Glubsmack McDougie", 1, 2, "NODES", ('round_bonus', {3: {'bean': -1, 'power': 1}})),
     (53, "Craig 8", 2, 2, "NODES", ('none', {})),  # flip handled via flip_at
-    (54, "Port Melanin", 0, 1, "NONE", ('cond_solo', {'power': 3})),
+    (54, "Port Melanin", 0, 1, "NONE", ('cond_solo', {'power': 4})),
 ]
 
 # Human-readable ability text for each card -- matches current behavior (redesigned cards
@@ -202,7 +206,7 @@ CARD_ABILITY_TEXT = {
     38: "Draw a card",
     39: "Draw 2 cards",
     40: "Round 3: +1 Power for each of your unplayed cards this combat",
-    41: "Round 3: +1 Power for every 2 extra Beans you have",
+    41: "Round 3: +1 Power for every 2 leftover Beans you have",
     42: "Round 2: +3 Beans",
     43: "Round 3: Destroy any card",
     44: "Round 1: Move this card to an opponent's board",
@@ -210,12 +214,12 @@ CARD_ABILITY_TEXT = {
     46: "",
     47: "Combo: Snow Angel -- +2 Beans, +2 Power",
     48: "Draw a card and place it under this one; this card gains Power equal to its own Bean value",
-    49: "Steal a random card from any player's hand",
+    49: "If one of your cards is destroyed while this is in your hand, this card immediately replaces it",
     50: "Choose any card played this round and remove its ability",
     51: "Draw a card and play it to this round",
-    52: "Round 3: +1 Bean, +1 Power",
+    52: "Round 3: -1 Bean, +1 Power",
     53: "You can flip this card when played (changes stats to 4 Bean / 0 Power)",
-    54: "+3 Power if this is the only card you play this round",
+    54: "+4 Power if this is the only card you play this round",
 }
 
 
@@ -362,6 +366,25 @@ class Game:
             c = self._draw_raw()
             if c is not None:
                 p.hand.append(c)
+
+    def _mark_destroyed(self, entry):
+        """Central destroy path -- every place in the engine that destroys a card must
+        call this (never set .destroyed directly) so Belt Tungus's reactive replacement
+        ("If one of your cards is destroyed while this is in your hand, this card
+        immediately replaces it") fires no matter which ability caused the destruction,
+        including a card destroying itself."""
+        if entry.destroyed:
+            return
+        entry.destroyed = True
+        owner = self.players[entry.owner]
+        if BELT_TUNGUS_ID in owner.hand:
+            for col in owner.columns:
+                if entry in col:
+                    owner.hand.remove(BELT_TUNGUS_ID)
+                    replacement = Entry(BELT_TUNGUS_ID, entry.owner)
+                    col.append(replacement)
+                    self._played_this_combat[entry.owner].append(replacement)
+                    break
 
     # -- prepare phase --
     def prepare(self, p):
@@ -817,7 +840,7 @@ class Game:
     def _destroy_by_uid(self, uid, pool):
         target = self._find_by_uid(uid, pool)
         if target:
-            target.destroyed = True
+            self._mark_destroyed(target)
 
     def _disable_by_uid(self, uid, pool):
         target = self._find_by_uid(uid, pool)
@@ -864,7 +887,7 @@ class Game:
             if pool:
                 uid = yield self._target_request(tag, e, pool)
                 self._destroy_by_uid(uid, pool)
-            e.destroyed = True
+            self._mark_destroyed(e)
         elif tag == 'play_from_discard':
             if self.discard and len(p.columns[rnd]) < 3:
                 choice = _to_py((yield {
@@ -1074,7 +1097,7 @@ class Game:
             mine = [x for x in p.board_all_entries() if x is not e and not x.destroyed]
             if mine:
                 victim = min(mine, key=lambda x: x.power())
-                victim.destroyed = True
+                self._mark_destroyed(victim)
         elif tag in ('destroy_any', 'destroy_any_round'):
             if tag == 'destroy_any_round' and params.get('round') != rnd + 1:
                 pass
@@ -1087,7 +1110,7 @@ class Game:
                                  if not x.destroyed and ability_of(x.cid)[0] != 'immune'])
                 if pool:
                     victim = max(pool, key=lambda x: x.power())
-                    victim.destroyed = True
+                    self._mark_destroyed(victim)
         elif tag == 'destroy_self_for_any':
             all_others = []
             for i in joiners:
@@ -1097,8 +1120,8 @@ class Game:
                                     if not x.destroyed and ability_of(x.cid)[0] != 'immune'])
             if all_others:
                 victim = max(all_others, key=lambda x: x.power())
-                victim.destroyed = True
-                e.destroyed = True
+                self._mark_destroyed(victim)
+                self._mark_destroyed(e)
         elif tag == 'draw':
             self.draw_to_hand(p, params.get('n', 1))
         elif tag == 'draw_and_play':
@@ -1124,13 +1147,6 @@ class Game:
                 top.remove(best)
                 p.hand.append(best)
                 self.deck = top + self.deck
-        elif tag == 'steal_random_hand':
-            pool = [i for i in others if self.players[i].hand]
-            if pool:
-                target = random.choice(pool)
-                stolen = random.choice(self.players[target].hand)
-                self.players[target].hand.remove(stolen)
-                p.hand.append(stolen)
         elif tag == 'remove_ability':
             pool = [(oi, x) for oi, x in all_entries_this_round
                     if oi != owner_i and x is not e and not x.destroyed and not x.ability_disabled]
@@ -1156,7 +1172,7 @@ class Game:
                         candidates.append((i2, r_idx, x))
             if candidates:
                 target_owner, target_r, target_entry = max(candidates, key=lambda t: t[2].power())
-                target_entry.destroyed = True
+                self._mark_destroyed(target_entry)
                 if e in p.columns[rnd]:
                     p.columns[rnd].remove(e)
                     e.owner = target_owner
@@ -1248,7 +1264,7 @@ class Game:
                             if not x.destroyed and ability_of(x.cid)[0] != 'immune']
                     if pool:
                         victim = max(pool, key=lambda x: x.power())
-                        victim.destroyed = True
+                        self._mark_destroyed(victim)
         elif group_name == 'moonhawk_they':
             if name_of(e.cid) == 'Moonhawk':
                 others = [i for i in self.players if i.idx != owner_i]
@@ -1258,7 +1274,7 @@ class Game:
                     e.owner = target
                     self.players[target].columns[rnd].append(e)
             elif name_of(e.cid) == 'They':
-                e.destroyed = True
+                self._mark_destroyed(e)
 
 
 def joinable_targets(joiners):

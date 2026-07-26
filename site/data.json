@@ -2,92 +2,87 @@
   "games": 5000,
   "players": 4,
   "pacing": {
-    "avg_turns": 17.3804,
+    "avg_turns": 16.9688,
     "min_turns": 2,
-    "max_turns": 63,
-    "avg_combats": 4.6788,
-    "avg_unopposed": 0.4786,
-    "unopposed_pct": 0.10229118577413011,
-    "avg_wounds": 4.3578,
+    "max_turns": 56,
+    "avg_combats": 4.7532,
+    "avg_unopposed": 0.4606,
+    "unopposed_pct": 0.09690313893797863,
+    "avg_wounds": 4.448,
     "seat_win_rate": [
-      0.2238,
-      0.2688,
-      0.2556,
-      0.2518
+      0.2268,
+      0.2716,
+      0.2566,
+      0.245
     ]
   },
   "combos": [
     {
       "name": "snow_christingle",
-      "total": 1799,
-      "per_game": 0.3598
+      "total": 1858,
+      "per_game": 0.3716
     },
     {
       "name": "ironpan_dishwasher",
-      "total": 1768,
-      "per_game": 0.3536
+      "total": 1639,
+      "per_game": 0.3278
     },
     {
       "name": "trio",
-      "total": 27,
-      "per_game": 0.0054
-    },
-    {
-      "name": "moonhawk_they",
-      "total": 1,
-      "per_game": 0.0002
+      "total": 36,
+      "per_game": 0.0072
     }
   ],
   "teams": [
     {
       "team": "NONE",
-      "played": 5015,
-      "win_rate": 0.32861415752741774
+      "played": 5246,
+      "win_rate": 0.3494090735798704
     },
     {
       "team": "V",
-      "played": 29234,
-      "win_rate": 0.3564342888417596
+      "played": 27268,
+      "win_rate": 0.3590655713657034
     },
     {
       "team": "BOLT",
-      "played": 45441,
-      "win_rate": 0.37274707862943157
-    },
-    {
-      "team": "HAWK",
-      "played": 27875,
-      "win_rate": 0.398457399103139
+      "played": 46445,
+      "win_rate": 0.37476585208310903
     },
     {
       "team": "TOPHAT",
-      "played": 36734,
-      "win_rate": 0.4093210649534491
+      "played": 37254,
+      "win_rate": 0.4014602458796371
+    },
+    {
+      "team": "HAWK",
+      "played": 30250,
+      "win_rate": 0.4025123966942149
     },
     {
       "team": "NODES",
-      "played": 40193,
-      "win_rate": 0.41328091956310803
+      "played": 48856,
+      "win_rate": 0.4105534632389062
     },
     {
       "team": "VU",
-      "played": 36717,
-      "win_rate": 0.41588365062505106
+      "played": 37315,
+      "win_rate": 0.41243467774353476
     },
     {
       "team": "RED2",
-      "played": 53957,
-      "win_rate": 0.4164056563559872
+      "played": 54252,
+      "win_rate": 0.4147681191476812
     },
     {
       "team": "TURTLE",
-      "played": 25103,
-      "win_rate": 0.42389355853882005
+      "played": 24614,
+      "win_rate": 0.4154546193223369
     },
     {
       "team": "Y",
-      "played": 51567,
-      "win_rate": 0.42913103341284153
+      "played": 52563,
+      "win_rate": 0.42335863630310294
     }
   ],
   "cards": [
@@ -98,8 +93,8 @@
       "bean": -2,
       "power": -6,
       "description": "Combo: They -- Move this card to another player's board",
-      "played": 32,
-      "win_rate": 0.0625,
+      "played": 37,
+      "win_rate": 0.16216216216216217,
       "low_sample": false
     },
     {
@@ -109,19 +104,19 @@
       "bean": -1,
       "power": 2,
       "description": "Move the strongest card from an opponent's board to whichever opponent has the least Power -- this card moves there too",
-      "played": 7932,
-      "win_rate": 0.2145738779626828,
+      "played": 8123,
+      "win_rate": 0.21506832451064878,
       "low_sample": false
     },
     {
       "id": 44,
       "name": "Grup Scrooge",
       "team": "TOPHAT",
-      "bean": -1,
+      "bean": 0,
       "power": -3,
       "description": "Round 1: Move this card to an opponent's board",
-      "played": 58,
-      "win_rate": 0.22413793103448276,
+      "played": 40,
+      "win_rate": 0.225,
       "low_sample": false
     },
     {
@@ -129,10 +124,10 @@
       "name": "Voodude",
       "team": "V",
       "bean": -2,
-      "power": 2,
+      "power": 1,
       "description": "Destroy the strongest card in play, then move this card to its former spot",
-      "played": 5220,
-      "win_rate": 0.3030651340996169,
+      "played": 2474,
+      "win_rate": 0.29991915925626517,
       "low_sample": false
     },
     {
@@ -142,52 +137,8 @@
       "bean": 1,
       "power": 0,
       "description": "Round 2: Your cards can't be destroyed during this combat",
-      "played": 848,
-      "win_rate": 0.30306603773584906,
-      "low_sample": false
-    },
-    {
-      "id": 54,
-      "name": "Port Melanin",
-      "team": "NONE",
-      "bean": 0,
-      "power": 1,
-      "description": "+3 Power if this is the only card you play this round",
-      "played": 5015,
-      "win_rate": 0.32861415752741774,
-      "low_sample": false
-    },
-    {
-      "id": 28,
-      "name": "Footrun Joyfun",
-      "team": "V",
-      "bean": 0,
-      "power": 1,
-      "description": "Combo: Jetplace Joyface + Junkrat Crotchrocket -- +1 Bean",
-      "played": 5047,
-      "win_rate": 0.32910639984149,
-      "low_sample": false
-    },
-    {
-      "id": 30,
-      "name": "Junkrat Crotchrocket",
-      "team": "V",
-      "bean": 0,
-      "power": 1,
-      "description": "Combo: Footrun Joyfun + Jetplace Joyface -- Destroy one card from every other player",
-      "played": 5046,
-      "win_rate": 0.33174791914387636,
-      "low_sample": false
-    },
-    {
-      "id": 24,
-      "name": "They",
-      "team": "HAWK",
-      "bean": 0,
-      "power": 1,
-      "description": "Combo: Moonhawk -- Destroy this card",
-      "played": 5073,
-      "win_rate": 0.33254484525921546,
+      "played": 795,
+      "win_rate": 0.3132075471698113,
       "low_sample": false
     },
     {
@@ -197,8 +148,8 @@
       "bean": -3,
       "power": 6,
       "description": "Destroy one of your cards",
-      "played": 7765,
-      "win_rate": 0.3329040566645203,
+      "played": 7919,
+      "win_rate": 0.3180957191564591,
       "low_sample": false
     },
     {
@@ -208,8 +159,30 @@
       "bean": 0,
       "power": 1,
       "description": "Combo: Footrun Joyfun + Junkrat Crotchrocket -- Draw a card",
-      "played": 5054,
-      "win_rate": 0.33854372774040364,
+      "played": 5235,
+      "win_rate": 0.3262655205348615,
+      "low_sample": false
+    },
+    {
+      "id": 30,
+      "name": "Junkrat Crotchrocket",
+      "team": "V",
+      "bean": 0,
+      "power": 1,
+      "description": "Combo: Footrun Joyfun + Jetplace Joyface -- Destroy one card from every other player",
+      "played": 5265,
+      "win_rate": 0.3302943969610636,
+      "low_sample": false
+    },
+    {
+      "id": 28,
+      "name": "Footrun Joyfun",
+      "team": "V",
+      "bean": 0,
+      "power": 1,
+      "description": "Combo: Jetplace Joyface + Junkrat Crotchrocket -- +1 Bean",
+      "played": 5301,
+      "win_rate": 0.3323901150726278,
       "low_sample": false
     },
     {
@@ -219,19 +192,19 @@
       "bean": 0,
       "power": 1,
       "description": "Draw a card and place it under this one; this card gains Power equal to its own Bean value",
-      "played": 4975,
-      "win_rate": 0.34311557788944724,
+      "played": 5280,
+      "win_rate": 0.34204545454545454,
       "low_sample": false
     },
     {
-      "id": 41,
-      "name": "Debit",
-      "team": "Y",
+      "id": 54,
+      "name": "Port Melanin",
+      "team": "NONE",
       "bean": 0,
       "power": 1,
-      "description": "Round 3: +1 Power for every 2 extra Beans you have",
-      "played": 5056,
-      "win_rate": 0.36253955696202533,
+      "description": "+4 Power if this is the only card you play this round",
+      "played": 5246,
+      "win_rate": 0.3494090735798704,
       "low_sample": false
     },
     {
@@ -241,19 +214,19 @@
       "bean": 1,
       "power": 1,
       "description": "Look at the top three cards of the deck, draw one and either add it to your hand or play it to this round",
-      "played": 6322,
-      "win_rate": 0.36254349889275544,
+      "played": 6421,
+      "win_rate": 0.35492913876343246,
       "low_sample": false
     },
     {
-      "id": 50,
-      "name": "Accordion Joe",
-      "team": "NODES",
-      "bean": -1,
+      "id": 41,
+      "name": "Debit",
+      "team": "Y",
+      "bean": 0,
       "power": 1,
-      "description": "Choose any card played this round and remove its ability",
-      "played": 3074,
-      "win_rate": 0.36369551073519846,
+      "description": "Round 3: +1 Power for every 2 leftover Beans you have",
+      "played": 5218,
+      "win_rate": 0.3599080107320813,
       "low_sample": false
     },
     {
@@ -263,19 +236,19 @@
       "bean": 0,
       "power": 1,
       "description": "Round 3: +2 Power",
-      "played": 5153,
-      "win_rate": 0.36774694352804194,
+      "played": 5235,
+      "win_rate": 0.3612225405921681,
       "low_sample": false
     },
     {
-      "id": 14,
-      "name": "Speedo",
-      "team": "RED2",
-      "bean": 4,
+      "id": 50,
+      "name": "Accordion Joe",
+      "team": "NODES",
+      "bean": -1,
       "power": 1,
-      "description": "This card must be played on Round 1",
-      "played": 9134,
-      "win_rate": 0.3719071600613094,
+      "description": "Choose any card played this round and remove its ability",
+      "played": 3361,
+      "win_rate": 0.36298720618863434,
       "low_sample": false
     },
     {
@@ -285,19 +258,8 @@
       "bean": 5,
       "power": 0,
       "description": "",
-      "played": 4041,
-      "win_rate": 0.37292749319475377,
-      "low_sample": false
-    },
-    {
-      "id": 8,
-      "name": "Floss",
-      "team": "BOLT",
-      "bean": 0,
-      "power": 2,
-      "description": "At any time, you may destroy this card to destroy another card of your choice",
-      "played": 7918,
-      "win_rate": 0.3742106592573882,
+      "played": 3816,
+      "win_rate": 0.3660901467505241,
       "low_sample": false
     },
     {
@@ -307,19 +269,8 @@
       "bean": 1,
       "power": 2,
       "description": "This card can be played as a 4th card in any round",
-      "played": 9764,
-      "win_rate": 0.3775092175337976,
-      "low_sample": false
-    },
-    {
-      "id": 10,
-      "name": "Brain Freeze",
-      "team": "BOLT",
-      "bean": 2,
-      "power": 1,
-      "description": "+1 Bean for every other card you play this round",
-      "played": 7285,
-      "win_rate": 0.3803706245710364,
+      "played": 9842,
+      "win_rate": 0.3748221906116643,
       "low_sample": false
     },
     {
@@ -329,8 +280,52 @@
       "bean": 0,
       "power": 2,
       "description": "",
-      "played": 9943,
-      "win_rate": 0.3858996278789098,
+      "played": 10008,
+      "win_rate": 0.3765987210231815,
+      "low_sample": false
+    },
+    {
+      "id": 24,
+      "name": "They",
+      "team": "HAWK",
+      "bean": 2,
+      "power": 1,
+      "description": "Combo: Moonhawk -- Destroy this card",
+      "played": 7317,
+      "win_rate": 0.3767937679376794,
+      "low_sample": false
+    },
+    {
+      "id": 14,
+      "name": "Speedo",
+      "team": "RED2",
+      "bean": 4,
+      "power": 1,
+      "description": "This card must be played on Round 1",
+      "played": 9183,
+      "win_rate": 0.3778721550691495,
+      "low_sample": false
+    },
+    {
+      "id": 8,
+      "name": "Floss",
+      "team": "BOLT",
+      "bean": 0,
+      "power": 2,
+      "description": "At any time, you may destroy this card to destroy another card of your choice",
+      "played": 7999,
+      "win_rate": 0.3780472559069884,
+      "low_sample": false
+    },
+    {
+      "id": 10,
+      "name": "Brain Freeze",
+      "team": "BOLT",
+      "bean": 2,
+      "power": 1,
+      "description": "+1 Bean for every other card you play this round",
+      "played": 7377,
+      "win_rate": 0.38552257015046765,
       "low_sample": false
     },
     {
@@ -340,30 +335,19 @@
       "bean": 2,
       "power": 1,
       "description": "Combo: Iron Pan -- +2 Beans",
-      "played": 7312,
-      "win_rate": 0.3963347921225383,
-      "low_sample": false
-    },
-    {
-      "id": 42,
-      "name": "Shan't Dance",
-      "team": "TOPHAT",
-      "bean": 1,
-      "power": 1,
-      "description": "Round 2: +3 Beans",
-      "played": 6390,
-      "win_rate": 0.39780907668231613,
+      "played": 7235,
+      "win_rate": 0.38949550794747756,
       "low_sample": false
     },
     {
       "id": 49,
       "name": "Belt Tungus",
       "team": "NODES",
-      "bean": -2,
-      "power": 1,
-      "description": "Steal a random card from any player's hand",
-      "played": 2307,
-      "win_rate": 0.3987863025574339,
+      "bean": 0,
+      "power": 2,
+      "description": "If one of your cards is destroyed while this is in your hand, this card immediately replaces it",
+      "played": 10002,
+      "win_rate": 0.39062187562487505,
       "low_sample": false
     },
     {
@@ -373,52 +357,8 @@
       "bean": 0,
       "power": 2,
       "description": "Round 3: +1 Power for each of your unplayed cards this combat",
-      "played": 9973,
-      "win_rate": 0.4008823824325679,
-      "low_sample": false
-    },
-    {
-      "id": 6,
-      "name": "Defrilibatorator",
-      "team": "BOLT",
-      "bean": -1,
-      "power": 1,
-      "description": "Choose a card from the discard pile and play it to this round",
-      "played": 3109,
-      "win_rate": 0.4010935992280476,
-      "low_sample": false
-    },
-    {
-      "id": 5,
-      "name": "Burger King",
-      "team": "VU",
-      "bean": 3,
-      "power": 1,
-      "description": "",
-      "played": 9605,
-      "win_rate": 0.4026028110359188,
-      "low_sample": false
-    },
-    {
-      "id": 23,
-      "name": "Iron Pan",
-      "team": "HAWK",
-      "bean": -1,
-      "power": 2,
-      "description": "Combo: Dishwasher -- +2 Power",
-      "played": 8043,
-      "win_rate": 0.40594305607360437,
-      "low_sample": false
-    },
-    {
-      "id": 33,
-      "name": "Captain Trumpet",
-      "team": "TURTLE",
-      "bean": 1,
-      "power": 1,
-      "description": "Round 1: +2 Beans / Round 2: +1 Bean, +1 Power / Round 3: +2 Power",
-      "played": 6270,
-      "win_rate": 0.4121212121212121,
+      "played": 10178,
+      "win_rate": 0.390842994694439,
       "low_sample": false
     },
     {
@@ -428,19 +368,41 @@
       "bean": -2,
       "power": 1,
       "description": "Round 3: Destroy any card",
-      "played": 2208,
-      "win_rate": 0.41304347826086957,
+      "played": 2551,
+      "win_rate": 0.391219129753038,
       "low_sample": false
     },
     {
-      "id": 52,
-      "name": "Glubsmack McDougie",
-      "team": "NODES",
-      "bean": 1,
+      "id": 45,
+      "name": "Shoulder Blade",
+      "team": "TOPHAT",
+      "bean": -2,
+      "power": 6,
+      "description": "Enters play with -2 Power",
+      "played": 8294,
+      "win_rate": 0.39558717144924044,
+      "low_sample": false
+    },
+    {
+      "id": 5,
+      "name": "Burger King",
+      "team": "VU",
+      "bean": 3,
+      "power": 1,
+      "description": "",
+      "played": 9872,
+      "win_rate": 0.3957658022690438,
+      "low_sample": false
+    },
+    {
+      "id": 23,
+      "name": "Iron Pan",
+      "team": "HAWK",
+      "bean": -1,
       "power": 2,
-      "description": "Round 3: +1 Bean, +1 Power",
-      "played": 9897,
-      "win_rate": 0.41315550166717185,
+      "description": "Combo: Dishwasher -- +2 Power",
+      "played": 8108,
+      "win_rate": 0.3983719782930439,
       "low_sample": false
     },
     {
@@ -450,30 +412,30 @@
       "bean": 2,
       "power": 1,
       "description": "Combo: Captain Christingle -- +2 Beans, +2 Power",
-      "played": 7262,
-      "win_rate": 0.41613880473698706,
+      "played": 7176,
+      "win_rate": 0.4042642140468227,
       "low_sample": false
     },
     {
-      "id": 45,
-      "name": "Shoulder Blades",
+      "id": 42,
+      "name": "Shan't Dance",
       "team": "TOPHAT",
-      "bean": -2,
-      "power": 6,
-      "description": "Enters play with -2 Power",
-      "played": 8215,
-      "win_rate": 0.41704199634814365,
+      "bean": 1,
+      "power": 1,
+      "description": "Round 2: +3 Beans",
+      "played": 6391,
+      "win_rate": 0.404631513065248,
       "low_sample": false
     },
     {
-      "id": 22,
-      "name": "Displeased Avian",
-      "team": "HAWK",
-      "bean": -3,
-      "power": 2,
-      "description": "Move one of your own cards to another player's board (defensive -- great for getting rid of a card someone dumped on you)",
-      "played": 3677,
-      "win_rate": 0.4171879249388088,
+      "id": 6,
+      "name": "Defrilibatorator",
+      "team": "BOLT",
+      "bean": -1,
+      "power": 1,
+      "description": "Choose a card from the discard pile and play it to this round",
+      "played": 3349,
+      "win_rate": 0.4102717229023589,
       "low_sample": false
     },
     {
@@ -483,8 +445,52 @@
       "bean": -1,
       "power": 2,
       "description": "Draw 2 cards",
-      "played": 7941,
-      "win_rate": 0.4257650170003778,
+      "played": 8145,
+      "win_rate": 0.41154082259054636,
+      "low_sample": false
+    },
+    {
+      "id": 22,
+      "name": "Displeased Avian",
+      "team": "HAWK",
+      "bean": -3,
+      "power": 2,
+      "description": "Move one of your own cards to another player's board (defensive -- great for getting rid of a card someone dumped on you)",
+      "played": 3899,
+      "win_rate": 0.4129263913824057,
+      "low_sample": false
+    },
+    {
+      "id": 52,
+      "name": "Glubsmack McDougie",
+      "team": "NODES",
+      "bean": 1,
+      "power": 2,
+      "description": "Round 3: -1 Bean, +1 Power",
+      "played": 10095,
+      "win_rate": 0.4182268449727588,
+      "low_sample": false
+    },
+    {
+      "id": 33,
+      "name": "Captain Trumpet",
+      "team": "TURTLE",
+      "bean": 1,
+      "power": 1,
+      "description": "Round 1: +2 Beans / Round 2: +1 Bean, +1 Power / Round 3: +2 Power",
+      "played": 6465,
+      "win_rate": 0.42041763341067284,
+      "low_sample": false
+    },
+    {
+      "id": 32,
+      "name": "Smurtle Gurtle Cheesecake Woman",
+      "team": "TURTLE",
+      "bean": 0,
+      "power": 1,
+      "description": "Round 1: +3 Power",
+      "played": 5200,
+      "win_rate": 0.4263461538461538,
       "low_sample": false
     },
     {
@@ -494,8 +500,8 @@
       "bean": 1,
       "power": 2,
       "description": "Combo: Snow Angel -- +2 Beans, +2 Power",
-      "played": 9920,
-      "win_rate": 0.4340725806451613,
+      "played": 9970,
+      "win_rate": 0.4325977933801404,
       "low_sample": false
     },
     {
@@ -505,19 +511,8 @@
       "bean": 2,
       "power": 2,
       "description": "You can flip this card when played (changes stats to 4 Bean / 0 Power)",
-      "played": 9996,
-      "win_rate": 0.4343737494997999,
-      "low_sample": false
-    },
-    {
-      "id": 12,
-      "name": "Chair Beard",
-      "team": "BOLT",
-      "bean": 0,
-      "power": 5,
-      "description": "Your other cards' abilities don't apply this round",
-      "played": 9991,
-      "win_rate": 0.43449104193774396,
+      "played": 10109,
+      "win_rate": 0.43476110396676226,
       "low_sample": false
     },
     {
@@ -527,8 +522,19 @@
       "bean": 2,
       "power": 1,
       "description": "Round 1: +1 Power",
-      "played": 7263,
-      "win_rate": 0.4415530772408096,
+      "played": 7189,
+      "win_rate": 0.4377521212964251,
+      "low_sample": false
+    },
+    {
+      "id": 12,
+      "name": "Chair Beard",
+      "team": "BOLT",
+      "bean": 0,
+      "power": 5,
+      "description": "Your other cards' abilities don't apply this round",
+      "played": 10262,
+      "win_rate": 0.4425063340479439,
       "low_sample": false
     },
     {
@@ -538,52 +544,8 @@
       "bean": -1,
       "power": 3,
       "description": "",
-      "played": 8628,
-      "win_rate": 0.4432081594807603,
-      "low_sample": false
-    },
-    {
-      "id": 21,
-      "name": "Guy Yacht",
-      "team": "HAWK",
-      "bean": -3,
-      "power": 3,
-      "description": "This card can't be moved or destroyed",
-      "played": 7009,
-      "win_rate": 0.44400057069482096,
-      "low_sample": false
-    },
-    {
-      "id": 15,
-      "name": "Faceplant",
-      "team": "RED2",
-      "bean": 2,
-      "power": 2,
-      "description": "Either draw a card or gain +2 Power",
-      "played": 10054,
-      "win_rate": 0.4455937935150189,
-      "low_sample": false
-    },
-    {
-      "id": 51,
-      "name": "Pakrat",
-      "team": "NODES",
-      "bean": 2,
-      "power": 2,
-      "description": "Draw a card and play it to this round",
-      "played": 9944,
-      "win_rate": 0.44599758648431215,
-      "low_sample": false
-    },
-    {
-      "id": 17,
-      "name": "Jonnakiss",
-      "team": "RED2",
-      "bean": 2,
-      "power": 2,
-      "description": "At any point, you may return this card to your hand to draw a card",
-      "played": 10078,
-      "win_rate": 0.44671561817821,
+      "played": 8741,
+      "win_rate": 0.4458299965678984,
       "low_sample": false
     },
     {
@@ -593,19 +555,63 @@
       "bean": 2,
       "power": 2,
       "description": "Draw a card",
-      "played": 10024,
-      "win_rate": 0.45071827613727056,
+      "played": 10103,
+      "win_rate": 0.4463030782935762,
+      "low_sample": false
+    },
+    {
+      "id": 17,
+      "name": "Jonnakiss",
+      "team": "RED2",
+      "bean": 2,
+      "power": 2,
+      "description": "At any point, you may return this card to your hand to draw a card",
+      "played": 10136,
+      "win_rate": 0.4485003946329913,
+      "low_sample": false
+    },
+    {
+      "id": 21,
+      "name": "Guy Yacht",
+      "team": "HAWK",
+      "bean": -3,
+      "power": 3,
+      "description": "This card can't be moved or destroyed",
+      "played": 7073,
+      "win_rate": 0.449031528347236,
+      "low_sample": false
+    },
+    {
+      "id": 15,
+      "name": "Faceplant",
+      "team": "RED2",
+      "bean": 2,
+      "power": 2,
+      "description": "Either draw a card or gain +2 Power",
+      "played": 10143,
+      "win_rate": 0.4499654934437543,
+      "low_sample": false
+    },
+    {
+      "id": 51,
+      "name": "Pakrat",
+      "team": "NODES",
+      "bean": 2,
+      "power": 2,
+      "description": "Draw a card and play it to this round",
+      "played": 10009,
+      "win_rate": 0.4503946448196623,
       "low_sample": false
     },
     {
       "id": 19,
-      "name": "Grom",
+      "name": "Grom From Brawl Stars",
       "team": "RED2",
       "bean": -1,
       "power": 3,
       "description": "Round 2: +1 Power",
-      "played": 8815,
-      "win_rate": 0.45830969937606353,
+      "played": 8887,
+      "win_rate": 0.4508833127039496,
       "low_sample": false
     },
     {
@@ -615,19 +621,8 @@
       "bean": -4,
       "power": 2,
       "description": "+4 Power if you have a Wound",
-      "played": 1944,
-      "win_rate": 0.4588477366255144,
-      "low_sample": false
-    },
-    {
-      "id": 2,
-      "name": "James Madison",
-      "team": "VU",
-      "bean": -5,
-      "power": 6,
-      "description": "",
-      "played": 5452,
-      "win_rate": 0.45928099779897286,
+      "played": 2159,
+      "win_rate": 0.45159796201945346,
       "low_sample": false
     },
     {
@@ -637,19 +632,8 @@
       "bean": 2,
       "power": 2,
       "description": "Round 2: +1 Bean / Round 3: +2 Beans",
-      "played": 9945,
-      "win_rate": 0.46003016591251883,
-      "low_sample": false
-    },
-    {
-      "id": 32,
-      "name": "Smurtle Gurtle Cheesecake Woman",
-      "team": "TURTLE",
-      "bean": 1,
-      "power": 1,
-      "description": "Round 1: +3 Power",
-      "played": 6093,
-      "win_rate": 0.4623338257016248,
+      "played": 10178,
+      "win_rate": 0.4557869915504028,
       "low_sample": false
     },
     {
@@ -659,8 +643,19 @@
       "bean": 3,
       "power": 2,
       "description": "Round 2: Flip this card (swaps Bean and Power)",
-      "played": 10185,
-      "win_rate": 0.46264113892979875,
+      "played": 10149,
+      "win_rate": 0.46112917528820574,
+      "low_sample": false
+    },
+    {
+      "id": 2,
+      "name": "James Madison",
+      "team": "VU",
+      "bean": -5,
+      "power": 6,
+      "description": "",
+      "played": 5638,
+      "win_rate": 0.46700957786449093,
       "low_sample": false
     },
     {
@@ -670,8 +665,8 @@
       "bean": -7,
       "power": 7,
       "description": "",
-      "played": 2976,
-      "win_rate": 0.5221774193548387,
+      "played": 3107,
+      "win_rate": 0.5156099130994528,
       "low_sample": false
     },
     {
@@ -681,12 +676,12 @@
       "bean": -3,
       "power": 1,
       "description": "Destroy any card",
-      "played": 1555,
-      "win_rate": 0.5749196141479099,
+      "played": 1758,
+      "win_rate": 0.5813424345847554,
       "low_sample": false
     }
   ],
   "min_sample": 30,
-  "generated_at": "2026-07-26T03:24:49.018085+00:00",
+  "generated_at": "2026-07-26T16:52:26.149128+00:00",
   "seed": 42
 }
