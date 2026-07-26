@@ -67,18 +67,26 @@ function respond(value, logMsg) {
 }
 
 // ---- card rendering ----
+function escapeHtml(s) {
+  const div = document.createElement("div");
+  div.textContent = s;
+  return div.innerHTML;
+}
+
 function cardEl(cid, opts = {}) {
-  const meta = cardMeta[cid] || { name: `#${cid}`, team: "NONE", bean: 0, power: 0 };
+  const meta = cardMeta[cid] || { name: `#${cid}`, team: "NONE", bean: 0, power: 0, description: "" };
   const div = document.createElement("div");
   div.className = "card";
   if (opts.selectable) div.classList.add("selectable");
   if (opts.selected) div.classList.add("selected");
   if (opts.disabled) div.classList.add("disabled");
   if (opts.destroyed) div.classList.add("destroyed");
+  if (opts.compact) div.classList.add("compact");
   div.innerHTML = `
     <span class="team-pill">${TEAM_LABELS[meta.team] || meta.team}</span>
     <div class="cname">${meta.name}${opts.subtitle ? ` <small>${opts.subtitle}</small>` : ""}</div>
     <div class="cstats"><span class="bean">${fmtSigned(meta.bean)}</span><span class="power">${fmtSigned(meta.power)}</span></div>
+    ${meta.description && !opts.compact ? `<div class="cability">${escapeHtml(meta.description)}</div>` : ""}
   `;
   if (opts.onClick) div.addEventListener("click", () => { if (!opts.disabled) opts.onClick(); });
   return div;
@@ -139,6 +147,7 @@ function renderBoards() {
         colEl.appendChild(cardEl(entry.cid, {
           destroyed: entry.destroyed,
           subtitle: entry.owner !== p.idx ? `(from ${playerName(entry.owner)})` : "",
+          compact: true,
         }));
       });
       cols.appendChild(colEl);

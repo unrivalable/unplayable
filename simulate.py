@@ -158,6 +158,71 @@ CARDS = [
     (54, "Port Melanin", 0, 1, "NONE", ('cond_solo', {'power': 3})),
 ]
 
+# Human-readable ability text for each card -- matches current behavior (redesigned cards
+# describe their current ability, not the original printed text; typos from the printed
+# cards are corrected here rather than reproduced). Empty string = vanilla, no ability.
+CARD_ABILITY_TEXT = {
+    1: "Round 3: +2 Power",
+    2: "",
+    3: "Look at the top three cards of the deck, draw one and either add it to your hand or play it to this round",
+    4: "Round 2: Flip this card (swaps Bean and Power)",
+    5: "",
+    6: "Choose a card from the discard pile and play it to this round",
+    7: "Move the strongest card from an opponent's board to whichever opponent has the least Power -- this card moves there too",
+    8: "At any time, you may destroy this card to destroy another card of your choice",
+    9: "Combo: Captain Christingle -- +2 Beans, +2 Power",
+    10: "+1 Bean for every other card you play this round",
+    11: "+4 Power if you have a Wound",
+    12: "Your other cards' abilities don't apply this round",
+    13: "Destroy one of your cards",
+    14: "This card must be played on Round 1",
+    15: "Either draw a card or gain +2 Power",
+    16: "Round 1: +1 Power",
+    17: "At any point, you may return this card to your hand to draw a card",
+    18: "Round 2: Your cards can't be destroyed during this combat",
+    19: "Round 2: +1 Power",
+    20: "Combo: They -- Move this card to another player's board",
+    21: "This card can't be moved or destroyed",
+    22: "Move one of your own cards to another player's board (defensive -- great for getting rid of a card someone dumped on you)",
+    23: "Combo: Dishwasher -- +2 Power",
+    24: "Combo: Moonhawk -- Destroy this card",
+    25: "",
+    26: "Destroy the strongest card in play, then move this card to its former spot",
+    27: "Destroy any card",
+    28: "Combo: Jetplace Joyface + Junkrat Crotchrocket -- +1 Bean",
+    29: "Combo: Footrun Joyfun + Junkrat Crotchrocket -- Draw a card",
+    30: "Combo: Footrun Joyfun + Jetplace Joyface -- Destroy one card from every other player",
+    31: "Combo: Iron Pan -- +2 Beans",
+    32: "Round 1: +3 Power",
+    33: "Round 1: +2 Beans / Round 2: +1 Bean, +1 Power / Round 3: +2 Power",
+    34: "This card can be played as a 4th card in any round",
+    35: "",
+    36: "Round 2: +1 Bean / Round 3: +2 Beans",
+    37: "",
+    38: "Draw a card",
+    39: "Draw 2 cards",
+    40: "Round 3: +1 Power for each of your unplayed cards this combat",
+    41: "Round 3: +1 Power for every 2 extra Beans you have",
+    42: "Round 2: +3 Beans",
+    43: "Round 3: Destroy any card",
+    44: "Round 1: Move this card to an opponent's board",
+    45: "Enters play with -2 Power",
+    46: "",
+    47: "Combo: Snow Angel -- +2 Beans, +2 Power",
+    48: "Draw a card and place it under this one; this card gains Power equal to its own Bean value",
+    49: "Steal a random card from any player's hand",
+    50: "Choose any card played this round and remove its ability",
+    51: "Draw a card and play it to this round",
+    52: "Round 3: +1 Bean, +1 Power",
+    53: "You can flip this card when played (changes stats to 4 Bean / 0 Power)",
+    54: "+3 Power if this is the only card you play this round",
+}
+
+
+def description_of(cid):
+    return CARD_ABILITY_TEXT.get(cid, "")
+
+
 # Flip data: card id -> (new_bean, new_power), and which round it happens (None = optional/on play)
 FLIP = {
     4: (2, 3, 2),    # Handfoot: swap to 2/3 at round 2
@@ -1312,6 +1377,7 @@ def run_batch(n_games=3000, n_players=4, min_sample=30):
             'team': team_of(cid),
             'bean': base_bean(cid),
             'power': base_power(cid),
+            'description': description_of(cid),
             'played': played,
             'win_rate': (won / played) if played else None,
             'low_sample': played < min_sample,

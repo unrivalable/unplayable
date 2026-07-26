@@ -97,6 +97,7 @@
       "team": "HAWK",
       "bean": -2,
       "power": -6,
+      "description": "Combo: They -- Move this card to another player's board",
       "played": 32,
       "win_rate": 0.0625,
       "low_sample": false
@@ -107,6 +108,7 @@
       "team": "BOLT",
       "bean": -1,
       "power": 2,
+      "description": "Move the strongest card from an opponent's board to whichever opponent has the least Power -- this card moves there too",
       "played": 7932,
       "win_rate": 0.2145738779626828,
       "low_sample": false
@@ -117,6 +119,7 @@
       "team": "TOPHAT",
       "bean": -1,
       "power": -3,
+      "description": "Round 1: Move this card to an opponent's board",
       "played": 58,
       "win_rate": 0.22413793103448276,
       "low_sample": false
@@ -127,6 +130,7 @@
       "team": "V",
       "bean": -2,
       "power": 2,
+      "description": "Destroy the strongest card in play, then move this card to its former spot",
       "played": 5220,
       "win_rate": 0.3030651340996169,
       "low_sample": false
@@ -137,6 +141,7 @@
       "team": "RED2",
       "bean": 1,
       "power": 0,
+      "description": "Round 2: Your cards can't be destroyed during this combat",
       "played": 848,
       "win_rate": 0.30306603773584906,
       "low_sample": false
@@ -147,6 +152,7 @@
       "team": "NONE",
       "bean": 0,
       "power": 1,
+      "description": "+3 Power if this is the only card you play this round",
       "played": 5015,
       "win_rate": 0.32861415752741774,
       "low_sample": false
@@ -157,6 +163,7 @@
       "team": "V",
       "bean": 0,
       "power": 1,
+      "description": "Combo: Jetplace Joyface + Junkrat Crotchrocket -- +1 Bean",
       "played": 5047,
       "win_rate": 0.32910639984149,
       "low_sample": false
@@ -167,6 +174,7 @@
       "team": "V",
       "bean": 0,
       "power": 1,
+      "description": "Combo: Footrun Joyfun + Jetplace Joyface -- Destroy one card from every other player",
       "played": 5046,
       "win_rate": 0.33174791914387636,
       "low_sample": false
@@ -177,6 +185,7 @@
       "team": "HAWK",
       "bean": 0,
       "power": 1,
+      "description": "Combo: Moonhawk -- Destroy this card",
       "played": 5073,
       "win_rate": 0.33254484525921546,
       "low_sample": false
@@ -187,6 +196,7 @@
       "team": "RED2",
       "bean": -3,
       "power": 6,
+      "description": "Destroy one of your cards",
       "played": 7765,
       "win_rate": 0.3329040566645203,
       "low_sample": false
@@ -197,6 +207,7 @@
       "team": "V",
       "bean": 0,
       "power": 1,
+      "description": "Combo: Footrun Joyfun + Junkrat Crotchrocket -- Draw a card",
       "played": 5054,
       "win_rate": 0.33854372774040364,
       "low_sample": false
@@ -207,6 +218,7 @@
       "team": "NODES",
       "bean": 0,
       "power": 1,
+      "description": "Draw a card and place it under this one; this card gains Power equal to its own Bean value",
       "played": 4975,
       "win_rate": 0.34311557788944724,
       "low_sample": false
@@ -217,6 +229,7 @@
       "team": "Y",
       "bean": 0,
       "power": 1,
+      "description": "Round 3: +1 Power for every 2 extra Beans you have",
       "played": 5056,
       "win_rate": 0.36253955696202533,
       "low_sample": false
@@ -227,6 +240,7 @@
       "team": "VU",
       "bean": 1,
       "power": 1,
+      "description": "Look at the top three cards of the deck, draw one and either add it to your hand or play it to this round",
       "played": 6322,
       "win_rate": 0.36254349889275544,
       "low_sample": false
@@ -237,6 +251,7 @@
       "team": "NODES",
       "bean": -1,
       "power": 1,
+      "description": "Choose any card played this round and remove its ability",
       "played": 3074,
       "win_rate": 0.36369551073519846,
       "low_sample": false
@@ -247,6 +262,7 @@
       "team": "VU",
       "bean": 0,
       "power": 1,
+      "description": "Round 3: +2 Power",
       "played": 5153,
       "win_rate": 0.36774694352804194,
       "low_sample": false
@@ -257,6 +273,7 @@
       "team": "RED2",
       "bean": 4,
       "power": 1,
+      "description": "This card must be played on Round 1",
       "played": 9134,
       "win_rate": 0.3719071600613094,
       "low_sample": false
@@ -267,6 +284,7 @@
       "team": "HAWK",
       "bean": 5,
       "power": 0,
+      "description": "",
       "played": 4041,
       "win_rate": 0.37292749319475377,
       "low_sample": false
@@ -277,6 +295,7 @@
       "team": "BOLT",
       "bean": 0,
       "power": 2,
+      "description": "At any time, you may destroy this card to destroy another card of your choice",
       "played": 7918,
       "win_rate": 0.3742106592573882,
       "low_sample": false
@@ -287,6 +306,7 @@
       "team": "TURTLE",
       "bean": 1,
       "power": 2,
+      "description": "This card can be played as a 4th card in any round",
       "played": 9764,
       "win_rate": 0.3775092175337976,
       "low_sample": false
@@ -297,6 +317,7 @@
       "team": "BOLT",
       "bean": 2,
       "power": 1,
+      "description": "+1 Bean for every other card you play this round",
       "played": 7285,
       "win_rate": 0.3803706245710364,
       "low_sample": false
@@ -307,6 +328,7 @@
       "team": "TOPHAT",
       "bean": 0,
       "power": 2,
+      "description": "",
       "played": 9943,
       "win_rate": 0.3858996278789098,
       "low_sample": false
@@ -317,6 +339,7 @@
       "team": "V",
       "bean": 2,
       "power": 1,
+      "description": "Combo: Iron Pan -- +2 Beans",
       "played": 7312,
       "win_rate": 0.3963347921225383,
       "low_sample": false
@@ -327,6 +350,7 @@
       "team": "TOPHAT",
       "bean": 1,
       "power": 1,
+      "description": "Round 2: +3 Beans",
       "played": 6390,
       "win_rate": 0.39780907668231613,
       "low_sample": false
@@ -337,6 +361,7 @@
       "team": "NODES",
       "bean": -2,
       "power": 1,
+      "description": "Steal a random card from any player's hand",
       "played": 2307,
       "win_rate": 0.3987863025574339,
       "low_sample": false
@@ -347,6 +372,7 @@
       "team": "Y",
       "bean": 0,
       "power": 2,
+      "description": "Round 3: +1 Power for each of your unplayed cards this combat",
       "played": 9973,
       "win_rate": 0.4008823824325679,
       "low_sample": false
@@ -357,6 +383,7 @@
       "team": "BOLT",
       "bean": -1,
       "power": 1,
+      "description": "Choose a card from the discard pile and play it to this round",
       "played": 3109,
       "win_rate": 0.4010935992280476,
       "low_sample": false
@@ -367,6 +394,7 @@
       "team": "VU",
       "bean": 3,
       "power": 1,
+      "description": "",
       "played": 9605,
       "win_rate": 0.4026028110359188,
       "low_sample": false
@@ -377,6 +405,7 @@
       "team": "HAWK",
       "bean": -1,
       "power": 2,
+      "description": "Combo: Dishwasher -- +2 Power",
       "played": 8043,
       "win_rate": 0.40594305607360437,
       "low_sample": false
@@ -387,6 +416,7 @@
       "team": "TURTLE",
       "bean": 1,
       "power": 1,
+      "description": "Round 1: +2 Beans / Round 2: +1 Bean, +1 Power / Round 3: +2 Power",
       "played": 6270,
       "win_rate": 0.4121212121212121,
       "low_sample": false
@@ -397,6 +427,7 @@
       "team": "TOPHAT",
       "bean": -2,
       "power": 1,
+      "description": "Round 3: Destroy any card",
       "played": 2208,
       "win_rate": 0.41304347826086957,
       "low_sample": false
@@ -407,6 +438,7 @@
       "team": "NODES",
       "bean": 1,
       "power": 2,
+      "description": "Round 3: +1 Bean, +1 Power",
       "played": 9897,
       "win_rate": 0.41315550166717185,
       "low_sample": false
@@ -417,6 +449,7 @@
       "team": "BOLT",
       "bean": 2,
       "power": 1,
+      "description": "Combo: Captain Christingle -- +2 Beans, +2 Power",
       "played": 7262,
       "win_rate": 0.41613880473698706,
       "low_sample": false
@@ -427,6 +460,7 @@
       "team": "TOPHAT",
       "bean": -2,
       "power": 6,
+      "description": "Enters play with -2 Power",
       "played": 8215,
       "win_rate": 0.41704199634814365,
       "low_sample": false
@@ -437,6 +471,7 @@
       "team": "HAWK",
       "bean": -3,
       "power": 2,
+      "description": "Move one of your own cards to another player's board (defensive -- great for getting rid of a card someone dumped on you)",
       "played": 3677,
       "win_rate": 0.4171879249388088,
       "low_sample": false
@@ -447,6 +482,7 @@
       "team": "Y",
       "bean": -1,
       "power": 2,
+      "description": "Draw 2 cards",
       "played": 7941,
       "win_rate": 0.4257650170003778,
       "low_sample": false
@@ -457,6 +493,7 @@
       "team": "TOPHAT",
       "bean": 1,
       "power": 2,
+      "description": "Combo: Snow Angel -- +2 Beans, +2 Power",
       "played": 9920,
       "win_rate": 0.4340725806451613,
       "low_sample": false
@@ -467,6 +504,7 @@
       "team": "NODES",
       "bean": 2,
       "power": 2,
+      "description": "You can flip this card when played (changes stats to 4 Bean / 0 Power)",
       "played": 9996,
       "win_rate": 0.4343737494997999,
       "low_sample": false
@@ -477,6 +515,7 @@
       "team": "BOLT",
       "bean": 0,
       "power": 5,
+      "description": "Your other cards' abilities don't apply this round",
       "played": 9991,
       "win_rate": 0.43449104193774396,
       "low_sample": false
@@ -487,6 +526,7 @@
       "team": "RED2",
       "bean": 2,
       "power": 1,
+      "description": "Round 1: +1 Power",
       "played": 7263,
       "win_rate": 0.4415530772408096,
       "low_sample": false
@@ -497,6 +537,7 @@
       "team": "Y",
       "bean": -1,
       "power": 3,
+      "description": "",
       "played": 8628,
       "win_rate": 0.4432081594807603,
       "low_sample": false
@@ -507,6 +548,7 @@
       "team": "HAWK",
       "bean": -3,
       "power": 3,
+      "description": "This card can't be moved or destroyed",
       "played": 7009,
       "win_rate": 0.44400057069482096,
       "low_sample": false
@@ -517,6 +559,7 @@
       "team": "RED2",
       "bean": 2,
       "power": 2,
+      "description": "Either draw a card or gain +2 Power",
       "played": 10054,
       "win_rate": 0.4455937935150189,
       "low_sample": false
@@ -527,6 +570,7 @@
       "team": "NODES",
       "bean": 2,
       "power": 2,
+      "description": "Draw a card and play it to this round",
       "played": 9944,
       "win_rate": 0.44599758648431215,
       "low_sample": false
@@ -537,6 +581,7 @@
       "team": "RED2",
       "bean": 2,
       "power": 2,
+      "description": "At any point, you may return this card to your hand to draw a card",
       "played": 10078,
       "win_rate": 0.44671561817821,
       "low_sample": false
@@ -547,6 +592,7 @@
       "team": "Y",
       "bean": 2,
       "power": 2,
+      "description": "Draw a card",
       "played": 10024,
       "win_rate": 0.45071827613727056,
       "low_sample": false
@@ -557,6 +603,7 @@
       "team": "RED2",
       "bean": -1,
       "power": 3,
+      "description": "Round 2: +1 Power",
       "played": 8815,
       "win_rate": 0.45830969937606353,
       "low_sample": false
@@ -567,6 +614,7 @@
       "team": "BOLT",
       "bean": -4,
       "power": 2,
+      "description": "+4 Power if you have a Wound",
       "played": 1944,
       "win_rate": 0.4588477366255144,
       "low_sample": false
@@ -577,6 +625,7 @@
       "team": "VU",
       "bean": -5,
       "power": 6,
+      "description": "",
       "played": 5452,
       "win_rate": 0.45928099779897286,
       "low_sample": false
@@ -587,6 +636,7 @@
       "team": "Y",
       "bean": 2,
       "power": 2,
+      "description": "Round 2: +1 Bean / Round 3: +2 Beans",
       "played": 9945,
       "win_rate": 0.46003016591251883,
       "low_sample": false
@@ -597,6 +647,7 @@
       "team": "TURTLE",
       "bean": 1,
       "power": 1,
+      "description": "Round 1: +3 Power",
       "played": 6093,
       "win_rate": 0.4623338257016248,
       "low_sample": false
@@ -607,6 +658,7 @@
       "team": "VU",
       "bean": 3,
       "power": 2,
+      "description": "Round 2: Flip this card (swaps Bean and Power)",
       "played": 10185,
       "win_rate": 0.46264113892979875,
       "low_sample": false
@@ -617,6 +669,7 @@
       "team": "TURTLE",
       "bean": -7,
       "power": 7,
+      "description": "",
       "played": 2976,
       "win_rate": 0.5221774193548387,
       "low_sample": false
@@ -627,12 +680,13 @@
       "team": "V",
       "bean": -3,
       "power": 1,
+      "description": "Destroy any card",
       "played": 1555,
       "win_rate": 0.5749196141479099,
       "low_sample": false
     }
   ],
   "min_sample": 30,
-  "generated_at": "2026-07-26T02:37:50.327764+00:00",
+  "generated_at": "2026-07-26T03:24:49.018085+00:00",
   "seed": 42
 }
