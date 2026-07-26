@@ -83,6 +83,7 @@ function cardEl(cid, opts = {}) {
   if (opts.destroyed) div.classList.add("destroyed");
   if (opts.compact) div.classList.add("compact");
   div.innerHTML = `
+    <img class="card-art" src="cards/${cid}.webp" alt="" loading="lazy" onerror="this.remove()">
     <span class="team-pill">${TEAM_LABELS[meta.team] || meta.team}</span>
     <div class="cname">${meta.name}${opts.subtitle ? ` <small>${opts.subtitle}</small>` : ""}</div>
     <div class="cstats"><span class="bean">${fmtSigned(meta.bean)}</span><span class="power">${fmtSigned(meta.power)}</span></div>

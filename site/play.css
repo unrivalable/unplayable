@@ -98,9 +98,20 @@ section.boards { margin-bottom: 1.2rem; }
   font-size: 0.78rem;
   cursor: default;
   position: relative;
-  min-width: 128px;
-  max-width: 170px;
+  min-width: 148px;
+  max-width: 190px;
+  overflow: hidden;
 }
+.card .card-art {
+  display: block;
+  width: calc(100% + 1rem);
+  margin: -0.4rem -0.5rem 0.4rem;
+  aspect-ratio: 5 / 7;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--border);
+}
+.card.compact .card-art { aspect-ratio: 4 / 3; object-position: top center; }
 .card .team-pill {
   display: inline-block;
   font-size: 0.62rem;
