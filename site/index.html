@@ -12,11 +12,6 @@
 <nav class="site-nav">
   <div class="nav-inner">
     <a class="nav-logo" href="index.html">Unemployables: Unplayable</a>
-    <div class="nav-links">
-      <a href="index.html" class="active">Rules</a>
-      <a href="results.html">Balance Results</a>
-      <a href="play.html">Play vs. AI</a>
-    </div>
   </div>
 </nav>
 
@@ -27,10 +22,6 @@
     <h1>Unemployables: Unplayable</h1>
     <p class="tagline">A bluffing and Power-combat card game for 3&ndash;4 players. Build Beans, bait
       opponents into a fight, and stack the highest Power on the table.</p>
-    <div class="hero-actions">
-      <a class="btn primary" href="play.html">🎮 Play vs. AI</a>
-      <a class="btn" href="results.html">📊 Balance Results</a>
-    </div>
     <div class="stat-strip">
       <div class="stat-chip"><div class="num">3</div><div class="label">Trophies to win</div></div>
       <div class="stat-chip"><div class="num">7</div><div class="label">Starting hand size</div></div>
@@ -51,6 +42,9 @@
       <li><a href="#combos">Combo Abilities</a></li>
       <li><a href="#team-bonus">Team Bonus</a></li>
       <li><a href="#end-of-combat">End of Combat &amp; Wounds</a></li>
+      <li><a href="#winning">Winning</a></li>
+      <li><a href="#summary">Quick Combat Summary</a></li>
+      <li><a href="#locations">Expansion: Location Cards</a></li>
       <li><a href="#quick-reference">Quick Reference</a></li>
     </ol>
   </nav>
@@ -73,12 +67,18 @@
       <li>Place <strong>1 card face up</strong> beside the deck to begin the <strong>Discard Pile</strong>.</li>
       <li>The tallest player takes the first turn.</li>
     </ol>
+    <div class="callout">
+      <div class="callout-title">Running out of cards</div>
+      If the Hero Deck runs out at any time, shuffle the Discard Pile to create a new Hero Deck.
+    </div>
   </section>
 
   <section class="rule-section" id="turn">
     <div class="section-kicker">03</div>
     <h2>Your Turn: Prepare or Challenge</h2>
-    <p class="lede">On your turn, choose <strong class="hl">one</strong> action: Prepare, or Challenge.</p>
+    <p class="lede">Unplayable is played in two phases — <strong>Preparation</strong> and
+      <strong>Combat</strong>. On your turn, choose <strong class="hl">one</strong> action: Prepare,
+      or Challenge.</p>
 
     <h3>Prepare</h3>
     <p>Do <strong>all</strong> of the following:</p>
@@ -120,17 +120,15 @@
   <section class="rule-section" id="combat">
     <div class="section-kicker">05</div>
     <h2>Combat</h2>
-    <p class="lede">Combat lasts <strong class="hl">3 rounds</strong>. Each player has their own
-      <strong>Board</strong> in front of them, and each round creates its own <strong>Column</strong>
-      on that Board — so by the end of a Combat, every Board is a 3-column record of everything that
-      player played.</p>
+    <p class="lede">Combat lasts <strong class="hl">3 rounds</strong>. A player's <strong>Board</strong>
+      is the area in front of them containing all Heroes they've played during the current Combat.</p>
 
     <h3>Each round</h3>
     <ol class="step-list">
       <li>Secretly play <strong>0&ndash;3 Hero Cards</strong> face down.</li>
       <li>Reveal all cards at the same time.</li>
-      <li>Place each round's cards in a separate Column.</li>
-      <li>Resolve the Hero Abilities of the cards played this round.</li>
+      <li>Resolve any Hero Abilities that trigger when revealed.</li>
+      <li>Place the revealed Heroes into that round's column on your Board.</li>
     </ol>
 
     <div class="callout">
@@ -138,16 +136,15 @@
       You cannot play duplicate Heroes during the same Combat.
     </div>
 
-    <p>Some Hero Abilities move a card onto another player's Board. A moved card is placed in the
-      <strong>current round's Column</strong> on that player's Board, and its Power counts toward
-      that player's total exactly like any card they played themselves.</p>
+    <p>Some Hero Abilities may allow you to play more than 3 Heroes during a round.</p>
 
     <h3>After Round 3</h3>
-    <ul>
+    <ol class="step-list">
+      <li>Resolve any remaining Hero Abilities.</li>
       <li>Apply Team Bonuses (see below).</li>
-      <li>Add together all Hero Power.</li>
-    </ul>
-    <p>The player with the <strong class="hl">highest total Power</strong> wins the Combat.</p>
+      <li>Add together the total Power of all Heroes.</li>
+    </ol>
+    <p>The player(s) with the <strong class="hl">highest total Power</strong> win the Combat.</p>
   </section>
 
   <section class="rule-section" id="hero-cards">
@@ -185,18 +182,25 @@
 
     <h3>Beans</h3>
     <ul>
-      <li>Heroes with a <strong>positive Bean value</strong> generate Beans when played.</li>
-      <li>Heroes with a <strong>negative Bean value</strong> cost Beans to play.</li>
-      <li>You may only play a Hero with a negative Bean value if you've generated enough Beans
-        <strong>earlier in the Combat or during the current round</strong> to pay its cost.</li>
+      <li>Heroes with a <strong>positive Bean Value</strong> generate Beans when played.</li>
+      <li>Heroes with a <strong>negative Bean Value</strong> cost Beans to play.</li>
+      <li>You may only play a Hero with a negative Bean Value if you've generated enough Beans
+        <strong>during previous rounds of the current Combat or during the current round</strong> to
+        pay its cost.</li>
+      <li>When Heroes are revealed, first generate all positive Beans, then pay the costs of all
+        negative Bean Heroes.</li>
     </ul>
+
+    <h3>Hero Abilities</h3>
+    <p>Unless a Hero says otherwise, its Ability resolves <strong class="hl">immediately when it is
+      revealed</strong>.</p>
   </section>
 
   <section class="rule-section" id="combos">
     <div class="section-kicker">07</div>
     <h2>Combo Abilities</h2>
-    <p class="lede">Some Heroes list another Hero as a Combo. A Combo only activates if
-      <strong class="hl">all listed Heroes are played during the same round.</strong></p>
+    <p class="lede">Some Heroes list one or more Combo Heroes. A Combo activates only if
+      <strong class="hl">all required Heroes are played during the same round.</strong></p>
 
     <div class="combo-example">
       <img src="cards/9.webp" alt="Snow Angel">
@@ -220,11 +224,12 @@
   <section class="rule-section" id="end-of-combat">
     <div class="section-kicker">09</div>
     <h2>End of Combat &amp; Wounds</h2>
-    <p class="lede">The player(s) with the highest total Power gain <strong class="hl">1 Trophy</strong>.</p>
+    <p class="lede">Each player tied for the highest total Power gains <strong class="hl">1
+      Trophy</strong>.</p>
 
     <h3>After Combat</h3>
     <ul>
-      <li>Discard all Hero Cards that were played.</li>
+      <li>Discard all Heroes that were played.</li>
       <li>Keep all unused cards in your hand.</li>
       <li>Draw until you have <strong>7 cards</strong>.</li>
       <li>Refill the Trader back to <strong>4 cards</strong>.</li>
@@ -232,37 +237,104 @@
 
     <div class="callout warn">
       <div class="callout-title">Wounds</div>
-      Only the player(s) with the <strong>least</strong> total Power lose the Combat and get
-      <strong>Wounded</strong> — everyone else, including anyone who isn't the winner but also isn't
-      lowest, is unaffected.
-      <p style="margin: 0.6rem 0 0;">A Wounded player may only draw back up to <strong>6 cards</strong>
-        on their next Preparation Phase. After that turn, the Wound is removed.</p>
+      Every player tied for the <strong>lowest</strong> total Power receives <strong>1 Wound</strong>.
+      <p style="margin: 0.6rem 0 0;">A player with a Wound may only draw back up to
+        <strong>6 cards</strong> during their next Preparation Phase. After that turn, the Wound is
+        removed.</p>
+    </div>
+  </section>
+
+  <section class="rule-section" id="winning">
+    <div class="section-kicker">10</div>
+    <h2>Winning</h2>
+    <p class="lede">The first player to earn <strong class="hl">3 Trophies</strong> wins the game.</p>
+    <p>Good luck&hellip; and JUICE IT UP!</p>
+  </section>
+
+  <section class="rule-section" id="summary">
+    <div class="section-kicker">11</div>
+    <h2>Quick Combat Summary</h2>
+    <ol class="step-list">
+      <li>Players Prepare until someone shouts &ldquo;JUICE IT UP!&rdquo;</li>
+      <li>Players secretly choose whether to join the Combat.</li>
+      <li>Play 3 rounds of Heroes.</li>
+      <li>Resolve Hero Abilities.</li>
+      <li>Apply Team Bonuses.</li>
+      <li>Compare total Power.</li>
+      <li>Award Trophies and Wounds.</li>
+      <li>Discard played Heroes.</li>
+      <li>Refill the Trader.</li>
+      <li>Draw back up to your maximum hand size.</li>
+    </ol>
+  </section>
+
+  <section class="rule-section" id="locations">
+    <div class="section-kicker">12</div>
+    <h2>Expansion: Location Cards</h2>
+    <p class="section-kicker" style="margin-top:-0.3rem;">Oh, the Places You'll Go!</p>
+    <p class="lede">This expansion adds <strong class="hl">Location Cards</strong> — a separate deck
+      that changes the rules of each Combat, one round at a time.</p>
+
+    <h3>Setup</h3>
+    <p>Shuffle the Location Deck separately from the Hero Deck. At the beginning of every
+      Preparation Phase, before the first player's turn, reveal <strong>3 Location Cards</strong>
+      face up in the center of the play area, arranged left to right as:</p>
+    <div class="term-grid">
+      <div class="term-card"><div class="term-name">Round 1 Location</div></div>
+      <div class="term-card"><div class="term-name">Round 2 Location</div></div>
+      <div class="term-card"><div class="term-name">Round 3 Location</div></div>
+    </div>
+    <p>Each Location affects only its matching Combat round.</p>
+
+    <div class="location-example-wrap">
+      <img src="cards/loc-atlantis.webp" alt="Atlantis location card: +3 Power if you have 10 or more Power this round" loading="lazy">
+      <img src="cards/loc-littlebottom.webp" alt="Little Bottom location card: this combat has a Round 4" loading="lazy">
+    </div>
+    <p style="text-align:center; color:var(--text-dim); font-size:0.9rem;">
+      Location Cards have no Bean, Power, or Team — just a Name and an effect that applies to
+      whichever round it's assigned to.
+    </p>
+
+    <h3>During Combat</h3>
+    <p>Before each round begins, apply that round's matching Location effect. Location effects apply
+      to <strong>every player participating in that round</strong>, unless the Location says
+      otherwise, and remain active for the entire round unless another card changes them.</p>
+
+    <h3>End of Combat</h3>
+    <p>Discard all three Location Cards. At the beginning of the next Preparation Phase, reveal 3 new
+      Location Cards.</p>
+
+    <div class="callout">
+      <div class="callout-title">Expansion Hero — Clamfish</div>
+      <strong>Ability:</strong> Replace this round's Location. When Clamfish is revealed, discard the
+      current Location for that round and immediately reveal a new Location from the top of the
+      Location Deck. The new Location takes effect immediately.
     </div>
   </section>
 
   <section class="rule-section" id="quick-reference">
-    <div class="section-kicker">10</div>
+    <div class="section-kicker">13</div>
     <h2>Quick Reference</h2>
     <table class="ref-table">
       <tr><th>Win condition</th><td>First to 3 Trophies</td></tr>
       <tr><th>Starting hand</th><td>7 cards</td></tr>
       <tr><th>Trader size</th><td>4 cards, always refilled</td></tr>
       <tr><th>Turn action</th><td>Prepare (draw 2, dedupe, discard 2, refill Trader) <em>or</em> Challenge</td></tr>
-      <tr><th>Combat length</th><td>3 rounds, up to 3 Hero Cards played per round</td></tr>
-      <tr><th>Bean rule</th><td>Negative-Bean Heroes need enough Beans generated earlier this Combat or this round</td></tr>
+      <tr><th>Combat length</th><td>3 rounds, up to 3 Hero Cards played per round (unless an Ability says otherwise)</td></tr>
+      <tr><th>Ability timing</th><td>Resolves immediately on reveal, unless the Hero says otherwise</td></tr>
+      <tr><th>Bean rule</th><td>Generate all positive Beans first, then pay negative-Bean costs</td></tr>
       <tr><th>Combo</th><td>All listed Heroes must be played in the <em>same round</em></td></tr>
       <tr><th>Team Bonus</th><td>2+ Heroes from one Team &rarr; each gets +1 Power</td></tr>
       <tr><th>Unopposed challenge</th><td>Challenger gets 2 Trophies immediately</td></tr>
-      <tr><th>Combat win</th><td>Highest total Power gets 1 Trophy</td></tr>
-      <tr><th>Wound</th><td>Lowest total Power &rarr; capped at 6 cards next Preparation Phase</td></tr>
+      <tr><th>Combat win</th><td>Every player tied for highest total Power gets 1 Trophy</td></tr>
+      <tr><th>Wound</th><td>Every player tied for lowest total Power &rarr; capped at 6 cards next Preparation Phase</td></tr>
       <tr><th>Duplicate Heroes</th><td>Cannot play two copies of the same Hero in one Combat</td></tr>
+      <tr><th>Locations (expansion)</th><td>3 revealed each Preparation Phase, one per round, discarded after Combat</td></tr>
     </table>
   </section>
 
   <footer>
-    Rules for <em>Unemployables: Unplayable</em>. See the
-    <a href="results.html">balance results</a> from thousands of simulated games, or
-    <a href="play.html">play a hand yourself</a> against the AI.
+    Official rules for <em>Unemployables: Unplayable</em>.
   </footer>
 
 </div>

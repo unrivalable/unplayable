@@ -1,8 +1,8 @@
-Here's 
+
 
 # **UNEMPLOYABLES: UNPLAYABLE**
 
-### **Official Rule Book**
+## **Official Rule Book**
 
 ---
 
@@ -20,27 +20,29 @@ Be the first player to earn **3 Trophies**.
 4. Place **1 card face up** beside the deck to begin the **Discard Pile**.  
 5. The tallest player takes the first turn.
 
-### ---
+If the Hero Deck runs out at any time, shuffle the Discard Pile to create a new Hero Deck.
+
+**\[Insert Setup Diagram Here\]**
+
+---
 
 # **Preparation Phase**
 
-Battleverse has two phases:
+Unplayable is played in two phases:
 
 * **Preparation Phase**  
 * **Combat Phase**
 
 On your turn, choose **one** action.
 
-## **Prepare**
-
-Do **all** of the following:
+### **Prepare**
 
 * Draw **2 cards** from the Deck, Trader, Discard Pile, or any combination of them.  
 * If your hand contains duplicate Heroes, you may discard any duplicate Hero and immediately draw a replacement card. Repeat this as many times as you wish.  
 * Discard **2 cards** from your hand.  
 * Refill the Trader back to **4 cards** if needed.
 
-## **Challenge**
+### **Challenge**
 
 Instead of preparing, shout:
 
@@ -71,31 +73,28 @@ If nobody joins, the challenger immediately gains **2 Trophies**, and the game r
 
 # **Combat**
 
-Each player has their own **Board** in front of them — the area where they place the Hero Cards
-they play during the combat. Each round creates its own **Column** on that Board, so after all 3
-rounds a player's Board is a 3-column array of everything they played that combat.
-
 Combat lasts **3 rounds**.
+
+A player's **Board** is the area in front of them containing all Heroes they have played during the current combat.
 
 Each round:
 
 1. Secretly play **0–3 Hero Cards** face down.  
 2. Reveal all cards at the same time.  
-3. Place each round's cards in a separate column.  
-4. Resolve the Hero Abilities of the cards played this round.
+3. Resolve any Hero Abilities that trigger when revealed.  
+4. Place the revealed Heroes into that round's column on your Board.
 
-You **cannot play duplicate Heroes during the same combat.**
+You cannot play duplicate Heroes during the same combat.
 
-Some Hero Abilities move a card onto another player's Board. A moved card is placed in the
-**current round's Column** on that player's Board, and its Power counts toward that player's
-total exactly like any card they played themselves.
+Some Hero Abilities may allow you to play more than **3 Heroes** during a round.
 
 After Round 3:
 
-* Apply Team Bonuses.  
-* Add together all Hero Power.
+1. Resolve any remaining Hero Abilities.  
+2. Apply Team Bonuses.  
+3. Add together the total Power of all Heroes.
 
-The player with the highest total Power wins the combat.
+The player(s) with the highest total Power win the combat.
 
 ---
 
@@ -109,19 +108,26 @@ Every Hero Card includes:
 * Team  
 * Ability
 
-**The bean value is located on the top left of the ability description box on each card, with the power level on the top right.**
+The **Bean Value** is shown in the upper-left corner of the Ability box. The **Power** value is shown in the upper-right corner.
 
-**Beans**
+**\[Insert Labeled Hero Card Diagram Here\]**
 
-* Heroes with a **positive Bean value** generate Beans when played.  
-* Heroes with a **negative Bean value** cost Beans to play.  
-* You may only play a Hero with a negative Bean value if you have generated enough Beans earlier in the combat or during the current round to pay its cost.
+### **Beans**
+
+* Heroes with a **positive Bean Value** generate Beans when played.  
+* Heroes with a **negative Bean Value** cost Beans to play.  
+* You may only play a Hero with a negative Bean Value if you have generated enough Beans during previous rounds of the current combat or during the current round.  
+* When Heroes are revealed, first generate all positive Beans, then pay the costs of all negative Bean Heroes.
+
+### **Hero Abilities**
+
+Unless a Hero says otherwise, its Ability resolves immediately when it is revealed.
 
 ### **Combo Abilities**
 
-Some Heroes list another Hero as a Combo.
+Some Heroes list one or more Combo Heroes.
 
-A Combo only activates if **all Heroes are played during the same round.**
+A Combo activates only if **all required Heroes are played during the same round.**
 
 ### **Team Bonus**
 
@@ -131,19 +137,85 @@ If you play **2 or more Heroes from the same Team**, each Hero from that Team ga
 
 # **End of Combat**
 
-The player(s) with the highest total Power gains **1 Trophy**.
+Each player tied for the highest total Power gains **1 Trophy**.
+
+Every player tied for the lowest total Power receives **1 Wound**.
 
 After Combat:
 
-* Discard all Hero Cards that were played.  
+* Discard all Heroes that were played.  
 * Keep all unused cards in your hand.  
 * Draw until you have **7 cards**.  
 * Refill the Trader back to **4 cards**.
 
-Only the player(s) with the **least** total Power lose the combat and get **wounded** — everyone
-else (including anyone who isn't the winner but also isn't lowest) is unaffected.
+A player with a Wound may only draw back up to **6 cards** during their next Preparation Phase. After that turn, the Wound is removed.
 
-A player with a Wound may only draw back up to **6 cards** on their next Preparation Phase. After that turn, the Wound is removed.
+---
 
-# 
+# **Winning**
+
+The first player to earn **3 Trophies** wins the game.
+
+**Good luck... and JUICE IT UP\!**
+
+---
+
+# **Quick Combat Summary**
+
+1. Players Prepare until someone shouts **"JUICE IT UP\!"**  
+2. Players secretly choose whether to join the combat.  
+3. Play **3 rounds** of Heroes.  
+4. Resolve Hero Abilities.  
+5. Apply Team Bonuses.  
+6. Compare total Power.  
+7. Award Trophies and Wounds.  
+8. Discard played Heroes.  
+9. Refill the Trader.  
+10. Draw back up to your maximum hand size.
+
+---
+
+# **Oh, the Places You'll Go\!**
+
+## **Expansion Rules**
+
+This expansion adds **Location Cards** that change the rules of each combat.
+
+### **Setup**
+
+Shuffle the **Location Deck** separately from the Hero Deck.
+
+At the beginning of **every Preparation Phase**, before the first player's turn, reveal **3 Location Cards** face up in the center of the play area.
+
+Arrange them from left to right as:
+
+* **Round 1 Location**  
+* **Round 2 Location**  
+* **Round 3 Location**
+
+Each Location affects only its matching combat round.
+
+### **During Combat**
+
+Before each round begins, apply the matching Location's effect.
+
+* The Round 1 Location affects Round 1\.  
+* The Round 2 Location affects Round 2\.  
+* The Round 3 Location affects Round 3\.
+
+Location effects apply to **every player participating in that round**, unless the Location says otherwise.
+
+Location effects remain active for the entire round unless another card changes them.
+
+### **End of Combat**
+
+Discard all three Location Cards.
+
+At the beginning of the next Preparation Phase, reveal **3 new Location Cards**.
+
+### **Expansion Hero – Clamfish**
+
+**Ability:** Replace this round's Location.
+
+When Clamfish is revealed, discard the current Location for that round and immediately reveal a new Location from the top of the Location Deck. The new Location takes effect immediately.
 
