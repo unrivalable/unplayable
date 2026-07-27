@@ -3,108 +3,268 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unemployables: Unplayable — Balance Results</title>
-<link rel="stylesheet" href="style.css">
+<title>Unemployables: Unplayable — Official Rules</title>
+<meta name="description" content="Official rulebook for Unemployables: Unplayable, a 3-round bluffing and Power-combat card game.">
+<link rel="stylesheet" href="rules.css">
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div>
-      <h1>Unemployables: Unplayable</h1>
-      <p class="subtitle">Simulated balance results — win rate by card and by team, from thousands of AI-played games.</p>
-      <p class="meta">
-        <span id="games-count">—</span> games simulated ·
-        seed <span id="seed-value">—</span> ·
-        generated <span id="generated-at">—</span>
-      </p>
-    </div>
-    <p><a href="play.html">Play vs. AI &rarr;</a></p>
-  </header>
 
-  <div id="error-banner" style="display:none; background:var(--bad); color:#fff; padding:0.75rem 1rem; border-radius:8px; margin-bottom:1.5rem;"></div>
-
-  <div class="stat-grid">
-    <div class="stat-card">
-      <div class="label">Avg turns / game</div>
-      <div class="value" id="stat-turns">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Avg combats / game</div>
-      <div class="value" id="stat-combats">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Unopposed challenges</div>
-      <div class="value" id="stat-unopposed">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Avg wounds / game</div>
-      <div class="value" id="stat-wounds">—</div>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Unemployables: Unplayable</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Rules</a>
+      <a href="results.html">Balance Results</a>
+      <a href="play.html">Play vs. AI</a>
     </div>
   </div>
+</nav>
 
-  <section>
-    <h2>Win rate by seat (turn order)</h2>
-    <p class="section-note">Whether going first, second, third, or fourth changes your odds.</p>
-    <div class="seat-row" id="seat-rates"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Official Rule Book</div>
+    <h1>Unemployables: Unplayable</h1>
+    <p class="tagline">A bluffing and Power-combat card game for 3&ndash;4 players. Build Beans, bait
+      opponents into a fight, and stack the highest Power on the table.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="play.html">🎮 Play vs. AI</a>
+      <a class="btn" href="results.html">📊 Balance Results</a>
+    </div>
+    <div class="stat-strip">
+      <div class="stat-chip"><div class="num">3</div><div class="label">Trophies to win</div></div>
+      <div class="stat-chip"><div class="num">7</div><div class="label">Starting hand size</div></div>
+      <div class="stat-chip"><div class="num">4</div><div class="label">Cards in the Trader</div></div>
+      <div class="stat-chip"><div class="num">3</div><div class="label">Rounds per Combat</div></div>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#goal">Goal</a></li>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="#turn">Your Turn: Prepare or Challenge</a></li>
+      <li><a href="#joining">Joining a Combat</a></li>
+      <li><a href="#combat">Combat</a></li>
+      <li><a href="#hero-cards">Hero Cards</a></li>
+      <li><a href="#combos">Combo Abilities</a></li>
+      <li><a href="#team-bonus">Team Bonus</a></li>
+      <li><a href="#end-of-combat">End of Combat &amp; Wounds</a></li>
+      <li><a href="#quick-reference">Quick Reference</a></li>
+    </ol>
+  </nav>
+
+  <section class="rule-section" id="goal">
+    <div class="section-kicker">01</div>
+    <h2>Goal</h2>
+    <p class="lede">Be the first player to earn <strong class="hl">3 Trophies</strong>.</p>
+    <p>Trophies come from winning Combats — either by having the highest total Power when a Combat
+      is contested, or by challenging when nobody dares to fight you.</p>
   </section>
 
-  <section>
-    <h2>Team win rate</h2>
-    <p class="section-note">Share of combats won when at least one card from that team was played. "No Team" is Port Melanin, which is intentionally teamless and never gets the Team Bonus.</p>
-    <div class="table-scroll">
-      <table id="team-table">
-        <thead>
-          <tr>
-            <th data-key="team">Team</th>
-            <th data-key="played" data-default-dir="desc">Times Played</th>
-            <th data-key="win_rate" data-default-dir="desc">Win Rate</th>
-          </tr>
-        </thead>
-        <tbody id="team-body"></tbody>
-      </table>
+  <section class="rule-section" id="setup">
+    <div class="section-kicker">02</div>
+    <h2>Setup</h2>
+    <ol class="step-list">
+      <li>Shuffle all Hero Cards into a single deck.</li>
+      <li>Deal <strong>7 cards</strong> to each player.</li>
+      <li>Place <strong>4 cards face up</strong> beside the deck to create the <strong>Trader</strong>.</li>
+      <li>Place <strong>1 card face up</strong> beside the deck to begin the <strong>Discard Pile</strong>.</li>
+      <li>The tallest player takes the first turn.</li>
+    </ol>
+  </section>
+
+  <section class="rule-section" id="turn">
+    <div class="section-kicker">03</div>
+    <h2>Your Turn: Prepare or Challenge</h2>
+    <p class="lede">On your turn, choose <strong class="hl">one</strong> action: Prepare, or Challenge.</p>
+
+    <h3>Prepare</h3>
+    <p>Do <strong>all</strong> of the following:</p>
+    <ul>
+      <li>Draw <strong>2 cards</strong> from the Deck, the Trader, the Discard Pile, or any combination of them.</li>
+      <li>If your hand contains duplicate Heroes, you may discard any duplicate and immediately draw a
+        replacement — repeat as many times as you wish.</li>
+      <li>Discard <strong>2 cards</strong> from your hand.</li>
+      <li>Refill the Trader back to <strong>4 cards</strong> if needed.</li>
+    </ul>
+
+    <h3>Challenge</h3>
+    <p>Instead of preparing, shout <strong class="hl">&ldquo;JUICE IT UP!&rdquo;</strong> This immediately
+      starts Combat.</p>
+  </section>
+
+  <section class="rule-section" id="joining">
+    <div class="section-kicker">04</div>
+    <h2>Joining a Combat</h2>
+    <p class="lede">When Combat begins, every other player secretly decides whether to join.</p>
+    <p>After counting down <strong>3&hellip; 2&hellip; 1&hellip;</strong>, everyone reveals at once:</p>
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">👍 Thumbs Up</div>
+        <p>Join the Combat.</p>
+      </div>
+      <div class="term-card">
+        <div class="term-name">👎 Thumbs Down</div>
+        <p>Stay out. Players who stay out cannot join later.</p>
+      </div>
+    </div>
+    <div class="callout warn">
+      <div class="callout-title">Unopposed Challenge</div>
+      If nobody joins, the challenger immediately gains <strong>2 Trophies</strong>, and the game
+      returns to the Preparation Phase.
     </div>
   </section>
 
-  <section>
-    <h2>Card win rate</h2>
-    <p class="section-note">Share of combats won by the player who played that card. Cards played fewer than the sample-size cutoff are dimmed — treat their rate as a weak signal, not a verdict. Click a column header to sort.</p>
-    <div class="controls">
-      <input type="search" id="card-search" placeholder="Search card name…">
-      <select id="team-filter">
-        <option value="">All teams</option>
-      </select>
+  <section class="rule-section" id="combat">
+    <div class="section-kicker">05</div>
+    <h2>Combat</h2>
+    <p class="lede">Combat lasts <strong class="hl">3 rounds</strong>. Each player has their own
+      <strong>Board</strong> in front of them, and each round creates its own <strong>Column</strong>
+      on that Board — so by the end of a Combat, every Board is a 3-column record of everything that
+      player played.</p>
+
+    <h3>Each round</h3>
+    <ol class="step-list">
+      <li>Secretly play <strong>0&ndash;3 Hero Cards</strong> face down.</li>
+      <li>Reveal all cards at the same time.</li>
+      <li>Place each round's cards in a separate Column.</li>
+      <li>Resolve the Hero Abilities of the cards played this round.</li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-title">Duplicate Heroes</div>
+      You cannot play duplicate Heroes during the same Combat.
     </div>
-    <div class="table-scroll">
-      <table id="card-table">
-        <thead>
-          <tr>
-            <th data-key="name">Name</th>
-            <th data-key="team">Team</th>
-            <th data-key="bean" data-default-dir="desc">Bean</th>
-            <th data-key="power" data-default-dir="desc">Power</th>
-            <th data-key="played" data-default-dir="desc">Times Played</th>
-            <th data-key="win_rate" data-default-dir="desc">Win Rate</th>
-          </tr>
-        </thead>
-        <tbody id="card-body"></tbody>
-      </table>
+
+    <p>Some Hero Abilities move a card onto another player's Board. A moved card is placed in the
+      <strong>current round's Column</strong> on that player's Board, and its Power counts toward
+      that player's total exactly like any card they played themselves.</p>
+
+    <h3>After Round 3</h3>
+    <ul>
+      <li>Apply Team Bonuses (see below).</li>
+      <li>Add together all Hero Power.</li>
+    </ul>
+    <p>The player with the <strong class="hl">highest total Power</strong> wins the Combat.</p>
+  </section>
+
+  <section class="rule-section" id="hero-cards">
+    <div class="section-kicker">06</div>
+    <h2>Hero Cards</h2>
+    <p class="lede">Every Hero Card includes a Name, Power, Bean Value, Team, and an Ability.</p>
+
+    <div class="example-wrap">
+      <div class="example-card">
+        <img src="cards/9.webp" alt="Snow Angel card" loading="lazy">
+      </div>
+      <div class="example-labels">
+        <div class="example-label">
+          <span class="dot">1</span>
+          <div><strong>Bean Value</strong><br><span class="desc">Top-left of the ability box. Positive
+            values generate Beans when played; negative values cost Beans to play.</span></div>
+        </div>
+        <div class="example-label">
+          <span class="dot">2</span>
+          <div><strong>Power</strong><br><span class="desc">Top-right of the ability box. Added to your
+            total at the end of Combat.</span></div>
+        </div>
+        <div class="example-label">
+          <span class="dot">3</span>
+          <div><strong>Ability</strong><br><span class="desc">Printed in the center box — may trigger on
+            a specific round, on any play, or as part of a Combo.</span></div>
+        </div>
+        <div class="example-label">
+          <span class="dot">4</span>
+          <div><strong>Team</strong><br><span class="desc">Shown by the icon at the bottom of the card
+            &mdash; relevant for the Team Bonus.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Beans</h3>
+    <ul>
+      <li>Heroes with a <strong>positive Bean value</strong> generate Beans when played.</li>
+      <li>Heroes with a <strong>negative Bean value</strong> cost Beans to play.</li>
+      <li>You may only play a Hero with a negative Bean value if you've generated enough Beans
+        <strong>earlier in the Combat or during the current round</strong> to pay its cost.</li>
+    </ul>
+  </section>
+
+  <section class="rule-section" id="combos">
+    <div class="section-kicker">07</div>
+    <h2>Combo Abilities</h2>
+    <p class="lede">Some Heroes list another Hero as a Combo. A Combo only activates if
+      <strong class="hl">all listed Heroes are played during the same round.</strong></p>
+
+    <div class="combo-example">
+      <img src="cards/9.webp" alt="Snow Angel">
+      <span class="combo-plus">+</span>
+      <img src="cards/47.webp" alt="Captain Christingle">
+    </div>
+    <p style="text-align:center; color:var(--text-dim); font-size:0.9rem;">
+      Snow Angel and Captain Christingle form a Combo — play them both in the same round and each
+      triggers its bonus.
+    </p>
+  </section>
+
+  <section class="rule-section" id="team-bonus">
+    <div class="section-kicker">08</div>
+    <h2>Team Bonus</h2>
+    <p class="lede">If you play <strong class="hl">2 or more Heroes from the same Team</strong> during
+      a Combat, each Hero from that Team gains <strong class="hl">+1 Power</strong> at the end of
+      Combat.</p>
+  </section>
+
+  <section class="rule-section" id="end-of-combat">
+    <div class="section-kicker">09</div>
+    <h2>End of Combat &amp; Wounds</h2>
+    <p class="lede">The player(s) with the highest total Power gain <strong class="hl">1 Trophy</strong>.</p>
+
+    <h3>After Combat</h3>
+    <ul>
+      <li>Discard all Hero Cards that were played.</li>
+      <li>Keep all unused cards in your hand.</li>
+      <li>Draw until you have <strong>7 cards</strong>.</li>
+      <li>Refill the Trader back to <strong>4 cards</strong>.</li>
+    </ul>
+
+    <div class="callout warn">
+      <div class="callout-title">Wounds</div>
+      Only the player(s) with the <strong>least</strong> total Power lose the Combat and get
+      <strong>Wounded</strong> — everyone else, including anyone who isn't the winner but also isn't
+      lowest, is unaffected.
+      <p style="margin: 0.6rem 0 0;">A Wounded player may only draw back up to <strong>6 cards</strong>
+        on their next Preparation Phase. After that turn, the Wound is removed.</p>
     </div>
   </section>
 
-  <section>
-    <h2>Combo triggers</h2>
-    <p class="section-note">How often each named combo actually came together in a game.</p>
-    <ul id="combo-list"></ul>
+  <section class="rule-section" id="quick-reference">
+    <div class="section-kicker">10</div>
+    <h2>Quick Reference</h2>
+    <table class="ref-table">
+      <tr><th>Win condition</th><td>First to 3 Trophies</td></tr>
+      <tr><th>Starting hand</th><td>7 cards</td></tr>
+      <tr><th>Trader size</th><td>4 cards, always refilled</td></tr>
+      <tr><th>Turn action</th><td>Prepare (draw 2, dedupe, discard 2, refill Trader) <em>or</em> Challenge</td></tr>
+      <tr><th>Combat length</th><td>3 rounds, up to 3 Hero Cards played per round</td></tr>
+      <tr><th>Bean rule</th><td>Negative-Bean Heroes need enough Beans generated earlier this Combat or this round</td></tr>
+      <tr><th>Combo</th><td>All listed Heroes must be played in the <em>same round</em></td></tr>
+      <tr><th>Team Bonus</th><td>2+ Heroes from one Team &rarr; each gets +1 Power</td></tr>
+      <tr><th>Unopposed challenge</th><td>Challenger gets 2 Trophies immediately</td></tr>
+      <tr><th>Combat win</th><td>Highest total Power gets 1 Trophy</td></tr>
+      <tr><th>Wound</th><td>Lowest total Power &rarr; capped at 6 cards next Preparation Phase</td></tr>
+      <tr><th>Duplicate Heroes</th><td>Cannot play two copies of the same Hero in one Combat</td></tr>
+    </table>
   </section>
 
   <footer>
-    Generated by <code>simulate.py</code>, a heuristic-AI game simulator for the
-    <em>Unemployables: Unplayable</em> card game. Win-rate correlates with card strength but
-    also with what kind of hand tends to include a card — see
-    <a href="https://github.com/nickmckay/unplayable/blob/main/simulation-results.md">simulation-results.md</a>
-    in the repo for full methodology and caveats.
+    Rules for <em>Unemployables: Unplayable</em>. See the
+    <a href="results.html">balance results</a> from thousands of simulated games, or
+    <a href="play.html">play a hand yourself</a> against the AI.
   </footer>
+
 </div>
-<script src="app.js"></script>
 </body>
 </html>
